@@ -31,18 +31,18 @@ Back end: NSRT-API
 
 ### Admin User Stories
 
-- Log in feature seperate from members which has more functionality
+- Log in feature will render seperately giving access to delete reviews not found appropriate.
 - Admins will have the ability to create other admins to moderate the forum.
 - Ability to delete reviews they do not find appropriate feedback or appropriate recipes.
 
 ### Stretch Goals
 
-- Implement a follow feature to other creators to see their recipes quickly.
-- Add a dual view mode for light mode / dark mode.
-- Add SSO API for easier registration and sign in. (Google account)
-- Search feature will also hit key words of the description as well, not just the title.
-- Redo search from a complete search to an onStatusChange search
-- Add a premium recipe feature which will lock certain recipes and add a payment Wall for the premium recipes.
+1. Add a dual view mode for light mode / dark mode.
+2. Add SSO API for easier registration and sign in. (Google account)
+3. Search feature will also hit key words of the description as well, not just the title.
+4. Redo search from a complete search to an onStatusChange search
+5. Implement a follow feature to other creators to see their recipes using a GET request.
+6. Add a premium recipe feature which will lock certain recipes and add a payment Wall for the premium recipes.
 
 ### Setup
 
