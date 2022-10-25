@@ -68,3 +68,4 @@ Back end: NSRT-API
 - [FE STRETCH] Create onStatusChange for Search functionality to auto populate
 - [BE/FE STRETCH] Implement a follow feature to see other creator recipes quickly
 - [FE STRETCH] Add premium recipe section to hide some until Paywall is uncovered (use API to "take payment")
+- [FE STRETCH] Favorite recipes tab to nav bar, create page to host all "liked" recipes
