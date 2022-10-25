@@ -1,6 +1,8 @@
 # Not So Rotten Tomatoes
 
-## Description!
+
+## Description
+
 
 The application is available for users to share their family recipes and review other recipes. User will have access to login and view other shares from users across the world. Each recipe card will have an image, recipe, and ability to add a review sharing your thoughts of it!
 
