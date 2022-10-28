@@ -1,5 +1,5 @@
 package com.revature.controller;
 
-public class Controller {
+public class UserController {
     //I am here to
 }
