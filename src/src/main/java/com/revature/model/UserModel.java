@@ -3,15 +3,15 @@ package com.revature.model;
 import java.util.Objects;
 
 public class UserModel {
-    int user_id;
+    private int user_id;
 
-    String username;
+    private String username;
 
-    String email;
+    private String email;
 
-    String password;
+    private String password;
 
-    int role_num;
+    private int role_num;
 
     public int getUser_id() {
         return user_id;

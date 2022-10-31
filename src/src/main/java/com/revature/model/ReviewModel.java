@@ -4,13 +4,20 @@ import java.util.Objects;
 
 public class ReviewModel {
 
-    int review_id;
+    private int review_id;
 
-    String author;
+    private int author;
 
-    String review_text;
+    private String review_text;
 
-    int recipe_id;
+    private int recipe_id;
+
+    public ReviewModel(int reviewId, int author, String text, int recipeId) {
+        this.review_id = reviewId;
+        this.author = author;
+        this.review_text = text;
+        this.recipe_id = recipeId;
+    }
 
     public int getReview_id() {
         return review_id;
@@ -20,11 +27,11 @@ public class ReviewModel {
         this.review_id = review_id;
     }
 
-    public String getAuthor() {
+    public int getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(int author) {
         this.author = author;
     }
 
@@ -49,7 +56,7 @@ public class ReviewModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReviewModel that = (ReviewModel) o;
-        return review_id == that.review_id && recipe_id == that.recipe_id && author.equals(that.author) && review_text.equals(that.review_text);
+        return review_id == that.review_id && recipe_id == that.recipe_id && author == that.author && review_text.equals(that.review_text);
     }
 
     @Override

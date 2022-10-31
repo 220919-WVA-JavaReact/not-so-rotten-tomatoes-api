@@ -4,15 +4,15 @@ import java.util.Objects;
 
 public class RecipeModel {
 
-    int recipe_id;
+    private int recipe_id;
 
-    String author;
+    private String author;
 
-    String recipe_name;
+    private String recipe_name;
 
-    String instructions;
+    private String instructions;
 
-    String category;
+    private String category;
 
     public int getRecipe_id() {
         return recipe_id;
