@@ -1,8 +1,6 @@
 # Not So Rotten Tomatoes
 
-
 ## Description
-
 
 The application is available for users to share their family recipes and review other recipes. User will have access to login and view other shares from users across the world. Each recipe card will have an image, recipe, and ability to add a review sharing your thoughts of it!
 
@@ -48,22 +46,38 @@ Back end: NSRT-API
 
 ### Setup
 
-- [SETUP] Repository FE/BE
-- [SETUP] Database RDS/pSQL
-- [SETUP] Java Models/Servlet/Controllers
-- [SETUP] Endpoints
-- [BE FEATURE] Login Functionality
-- [BE FEATURE] Logout Functionality
-- [BE FEATURE] Search Functionality
-- [BE FEATURE] Comment Functionality
-- [BE FEATURE] Create Recipe Functionality
-- [BE FEATURE] Update Recipe Functionality
-- [BE FEATURE] Delete Recipe Functionality
-- [BE FEATURE] Delete Account Functionality
+- [SETUP] Repository FE/BE - \*
+- [SETUP] Database RDS/pSQL - \*
+- [SETUP] Java Models/Servlet/Controllers - \*
+- [SETUP] Endpoints - \*
+- [BE FEATURE] Login Functionality (POST)- Tyler
+- [BE FEATURE] Logout Functionality (POST) - Tyler
+- [BE FEATURE] Register Functionality (POST) - Tyler
+- [BE FEATURE] Search Recipes Functionality (GET) - Patrick
+- [BE FEATURE] New Comment Functionality (POST) - Cory
+- [BE FEATURE] Delete Comment Functionality (DELETE) - Cory
+- [BE FEATURE] Create Recipe Functionality (POST) - Patrick
+- [BE FEATURE] Update Recipe Functionality (PATCH) - Claire
+- [BE FEATURE] Delete Recipe Functionality (DELETE) - Claire
+- [BE FEATURE] Delete Account Functionality (DELETE) - Whoever
+
+- [FE FEATURE] Login Functionality (POST)- Tyler
+- [FE FEATURE] Logout Functionality (POST) - Tyler
+- [FE FEATURE] Register Functionality (POST) - Tyler
+- [FE FEATURE] Search Recipes Functionality (GET) - Patrick
+- [FE FEATURE] New Comment Functionality (POST) - Cory
+- [FE FEATURE] Delete Comment Functionality (DELETE) - Cory
+- [FE FEATURE] Create Recipe Functionality (POST) - Patrick
+- [FE FEATURE] Update Recipe Functionality (PATCH) - Claire
+- [FE FEATURE] Delete Recipe Functionality (DELETE) - Claire
+- [FE FEATURE] Delete Account Functionality (DELETE) - Whoever
+
 - [FE DESIGN] Create Landing Page Nav (Site name, login search function)
-- [FE DESIGN] Create Login/Register Page
 - [FE DESIGN] Create Landing Page Cards for Recipes
 - [FE DESIGN] Create User Profile Page
+- [FE DESIGN] Create Login/Register Form
+- [FE DESIGN] Create New Recipe Form
+- [FE DESIGN] Individual Recipe Page
 
 - [FE STRETCH] Redo Login with SSO API Functionality.
 - [FE STRETCH] Add Light/Dark Mode switch
