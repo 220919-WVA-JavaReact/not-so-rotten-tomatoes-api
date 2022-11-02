@@ -30,7 +30,7 @@ public class RecipeController {
 //            h.printStackTrace();
 //        }
 
-        return ResponseEntity.badRequest().build(); //just to see that we get *A* response!
+        return ResponseEntity.ok().build(); //just to see that we get *A* response!
     }
 
 }
