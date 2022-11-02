@@ -20,10 +20,10 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @OneToMany(mappedBy = "author")
-    Set<Review> reviews;
-    @OneToMany(mappedBy = "author")
-    Set<Recipe> recipes;
+//    @OneToMany(mappedBy = "author")
+//    Set<Review> reviews;
+//    @OneToMany(mappedBy = "author")
+//    Set<Recipe> recipes;
 
     public User() {
     }
@@ -74,33 +74,18 @@ public class User {
         this.role = role;
     }
 
-    public Set<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(Set<Review> reviews) {
-        this.reviews = reviews;
-    }
-
-    public Set<Recipe> getRecipes() {
-        return recipes;
-    }
-
-    public void setRecipes(Set<Recipe> recipes) {
-        this.recipes = recipes;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return user_id == user.user_id && Objects.equals(username, user.username) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && role == user.role && Objects.equals(reviews, user.reviews) && Objects.equals(recipes, user.recipes);
+        return user_id == user.user_id && Objects.equals(username, user.username) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && role == user.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user_id, username, email, password, role, reviews, recipes);
+        return Objects.hash(user_id, username, email, password, role);
     }
 
     @Override
@@ -111,8 +96,6 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +
-                ", reviews=" + reviews +
-                ", recipes=" + recipes +
                 '}';
     }
 }

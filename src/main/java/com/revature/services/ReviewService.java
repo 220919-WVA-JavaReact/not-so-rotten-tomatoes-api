@@ -22,7 +22,7 @@ public class ReviewService {
     }
 
     public List<Review> getAllReviews(){
-        List<Review> reviews = rr.findAll();
+        List<Review> reviews = rr.findAll().stream().map(review -> new Review()).collect(Collectors.toList());
 
         return reviews;
     }

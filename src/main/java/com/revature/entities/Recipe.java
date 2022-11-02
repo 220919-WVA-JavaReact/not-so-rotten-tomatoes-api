@@ -9,7 +9,7 @@ import java.util.Set;
 public class Recipe {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int recipe_id;
     @ManyToOne
     @JoinColumn(name = "author", referencedColumnName = "user_id")
@@ -20,8 +20,8 @@ public class Recipe {
     private String instructions;
     @Enumerated(EnumType.STRING)
     private Category category;
-    @OneToMany(mappedBy = "recipe_id")
-    Set<Review> reviews;
+//    @OneToMany(mappedBy = "recipe_id")
+//    Set<Review> reviews;
 
     public int getRecipe_id() {
         return recipe_id;
@@ -63,25 +63,18 @@ public class Recipe {
         this.category = category;
     }
 
-    public Set<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(Set<Review> reviews) {
-        this.reviews = reviews;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Recipe recipe = (Recipe) o;
-        return recipe_id == recipe.recipe_id && Objects.equals(author, recipe.author) && Objects.equals(recipe_name, recipe.recipe_name) && Objects.equals(instructions, recipe.instructions) && category == recipe.category && Objects.equals(reviews, recipe.reviews);
+        return recipe_id == recipe.recipe_id && Objects.equals(author, recipe.author) && Objects.equals(recipe_name, recipe.recipe_name) && Objects.equals(instructions, recipe.instructions) && category == recipe.category;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(recipe_id, author, recipe_name, instructions, category, reviews);
+        return Objects.hash(recipe_id, author, recipe_name, instructions, category);
     }
 
     @Override
@@ -92,7 +85,6 @@ public class Recipe {
                 ", recipe_name='" + recipe_name + '\'' +
                 ", instructions='" + instructions + '\'' +
                 ", category=" + category +
-                ", reviews=" + reviews +
                 '}';
     }
 }
