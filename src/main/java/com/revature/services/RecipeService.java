@@ -9,4 +9,5 @@ public class RecipeService {
     //@Query("UPDATE recipes SET instructions = ?2 WHERE recipe_id = ?2 RETURNING *")
     //Recipe update(int id, String update)
     //if this does not work, try with nativeQuery = true in the above query string.
+    // syntax for nativeQuery:: @Query(value = "SELECT * FROM USERS WHERE EMAIL_ADDRESS = ?1", nativeQuery = true)
 }
