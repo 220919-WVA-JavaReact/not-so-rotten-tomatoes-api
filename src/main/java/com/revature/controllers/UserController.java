@@ -33,7 +33,6 @@ public class UserController {
             return new ResponseEntity<>(users, HttpStatus.OK);
         }
 
-
     }
 
     //PathVariable is used for mapping to variable given in map request

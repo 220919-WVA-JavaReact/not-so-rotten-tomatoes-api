@@ -23,19 +23,5 @@ public class ReviewController {
         this.rs = rs;
     }
 
-//    @GetMapping("/reviews")
-//    public ResponseEntity<List<Review>> getReviews(@RequestParam(name="category", required = false) Category category){
-//        List<Review> reviews = null;
-//        //If no request parms, return all users
-//        if (category == null) {
-//            reviews = rs.getAllReviews();
-//            return new ResponseEntity<>(reviews, HttpStatus.OK);
-//        } else {
-////            reviews = rs.getReviewsByCategory(category);
-////            return new ResponseEntity<>(reviews, HttpStatus.OK);
-//            return new ResponseEntity<>(reviews, HttpStatus.OK);
-//        }
 
-
-//    }
 }
