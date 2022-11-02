@@ -20,17 +20,17 @@ public class RecipeController {
 
         //deconstruct args, insert into below update statement
 
-        try {
-           // RecipeModel rm = RecipeService.update(id, rb.getInstructions()); //THIS IS FUTURE-PROOFING. We don't want to simply pass an int and a string in say, an array, then pull it out -- in future, we might want to update additional fields than just instructions ie
-            //TODO: IF ABOVE IS NULL, ERROR
-            //ELSE, PROCEED
-            return ResponseEntity.ok(rm);
-        } catch (GenericJDBCException h){ //TODO: CREATE CUSTOM EXCEPTION, PASS HERE!
-           // return ResponseEntity.notFound().build();
-            h.printStackTrace();
-        }
+//        try {
+//           // RecipeModel rm = RecipeService.update(id, rb.getInstructions()); //THIS IS FUTURE-PROOFING. We don't want to simply pass an int and a string in say, an array, then pull it out -- in future, we might want to update additional fields than just instructions ie
+//            //TODO: IF ABOVE IS NULL, ERROR
+//            //ELSE, PROCEED
+//            return ResponseEntity.ok().build();
+//        } catch (GenericJDBCException h){ //TODO: CREATE CUSTOM EXCEPTION, PASS HERE!
+//           // return ResponseEntity.notFound().build();
+//            h.printStackTrace();
+//        }
 
-//        return ResponseEntity.badRequest().build(); //just to see that we get *A* response!
+        return ResponseEntity.badRequest().build(); //just to see that we get *A* response!
     }
 
 }
