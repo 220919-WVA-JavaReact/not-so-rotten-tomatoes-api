@@ -4,8 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class nsrtApp {
-    public static void main(String[] args){
-        SpringApplication.run(nsrtApp.class, args);
-    }
+public class NsrtApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(NsrtApplication.class, args);
+	}
+
 }

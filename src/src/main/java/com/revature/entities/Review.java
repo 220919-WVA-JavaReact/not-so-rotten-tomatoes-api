@@ -1,23 +1,24 @@
-package com.revature.model;
+package com.revature.entities;
 
+import javax.persistence.*;
 import java.util.Objects;
 
-public class ReviewModel {
+@Entity
+@Table(name="reviews")
+public class Review {
 
+    @Id
+    @Column(nullable = false)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int review_id;
-
-    private int author;
-
+    @ManyToOne
+    @JoinColumn(name = "author", referencedColumnName = "user_id")
+    private User author;
+    @Column(nullable = false)
     private String review_text;
-
-    private int recipe_id;
-
-    public ReviewModel(int reviewId, int author, String text, int recipeId) {
-        this.review_id = reviewId;
-        this.author = author;
-        this.review_text = text;
-        this.recipe_id = recipeId;
-    }
+    @ManyToOne
+    @JoinColumn(name = "recipe_id", referencedColumnName = "recipe_id")
+    private Recipe recipe_id;
 
     public int getReview_id() {
         return review_id;
@@ -27,11 +28,11 @@ public class ReviewModel {
         this.review_id = review_id;
     }
 
-    public int getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(int author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 
@@ -43,11 +44,11 @@ public class ReviewModel {
         this.review_text = review_text;
     }
 
-    public int getRecipe_id() {
+    public Recipe getRecipe_id() {
         return recipe_id;
     }
 
-    public void setRecipe_id(int recipe_id) {
+    public void setRecipe_id(Recipe recipe_id) {
         this.recipe_id = recipe_id;
     }
 
@@ -55,8 +56,8 @@ public class ReviewModel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ReviewModel that = (ReviewModel) o;
-        return review_id == that.review_id && recipe_id == that.recipe_id && author == that.author && review_text.equals(that.review_text);
+        Review review = (Review) o;
+        return review_id == review.review_id && Objects.equals(author, review.author) && Objects.equals(review_text, review.review_text) && Objects.equals(recipe_id, review.recipe_id);
     }
 
     @Override
@@ -66,9 +67,9 @@ public class ReviewModel {
 
     @Override
     public String toString() {
-        return "ReviewModel{" +
+        return "Review{" +
                 "review_id=" + review_id +
-                ", author='" + author + '\'' +
+                ", author=" + author +
                 ", review_text='" + review_text + '\'' +
                 ", recipe_id=" + recipe_id +
                 '}';
