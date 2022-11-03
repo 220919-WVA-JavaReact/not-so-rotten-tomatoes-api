@@ -1,4 +1,4 @@
-package com.revature.controllers;
+package controllers;
 
 import com.revature.services.RecipeService;
 import org.hibernate.exception.GenericJDBCException;
@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/recipe")
+@RequestMapping("/recipes")
 public class RecipeController {
     @Autowired
     private RecipeService rs;

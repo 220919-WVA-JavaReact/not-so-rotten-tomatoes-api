@@ -1,4 +1,4 @@
-package com.revature.controllers;
+package controllers;
 
 
 import com.revature.dtos.UserDTO;
