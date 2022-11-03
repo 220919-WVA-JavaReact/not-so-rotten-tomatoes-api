@@ -2,14 +2,20 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
-    <include resource="org/springframework/boot/logging/logback/file-appender.xml" />
 
     <property name="FILE" value="not-so-rotten-tomatoes-api/application.log" />
+    <include resource="org/springframework/boot/logging/logback/file-appender.xml" />
+
+
 
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
     </root>
     <logger name="com.revature.exceptions.GlobalExceptionHandler" level="ERROR">
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <logger name="com.revature.aspects.LoggingAspect" level="TRACE">
         <appender-ref ref="FILE" />
     </logger>
 

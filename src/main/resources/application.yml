@@ -20,5 +20,6 @@ management:
         include:
           - "*"
 
-logging:
-  file: application.log
+server:
+  error:
+    include-stacktrace: never
