@@ -20,4 +20,7 @@ public class RecipeService {
         return rr.findAll();
     }
 
+    public Recipe createRecipe(Recipe recipe) {
+        return rr.save(recipe);
+    }
 }
