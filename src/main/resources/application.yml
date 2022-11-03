@@ -12,3 +12,13 @@ spring:
   profiles:
     active:
       - "@profileActive"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - "*"
+
+logging:
+  file: application.log

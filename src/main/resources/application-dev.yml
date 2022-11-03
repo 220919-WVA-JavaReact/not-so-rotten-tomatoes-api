@@ -12,3 +12,6 @@ spring:
   h2:
     console:
       enabled: true
+
+logging:
+  file: application.log
