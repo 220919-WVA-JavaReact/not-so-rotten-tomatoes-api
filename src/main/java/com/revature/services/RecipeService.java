@@ -3,6 +3,7 @@ package com.revature.services;
 import com.revature.entities.Recipe;
 import com.revature.repositories.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,18 @@ public class RecipeService {
 
     public List<Recipe> getAllRecipes() {
         return rr.findAll();
+    }
+
+    //I NOW directly call recipe repository r.updateById(id, update) or some such. I  may need to be manually done, we will see.
+    //TODO: RESEARCH HOW PATCH REQUESTS WORK IN JPA repository!
+    //@Query("UPDATE recipes SET instructions = ?2 WHERE recipe_id = ?2 RETURNING *")
+    //Recipe update(int id, String update)
+    //if this does not work, try with nativeQuery = true in the above query string.
+    // syntax for nativeQuery:: @Query(value = "SELECT * FROM USERS WHERE EMAIL_ADDRESS = ?1", nativeQuery = true)
+    @Query("UPDATE recipes SET instructions = ?2 WHERE recipe_id = ?2 RETURNING *")
+    public Recipe updateRecipe(int id, String update){
+        Recipe r = new Recipe();
+        r.setInstructions(update); //OBVIOUSLY, we will need to change this!
     }
 
 }
