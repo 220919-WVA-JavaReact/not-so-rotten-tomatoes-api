@@ -14,9 +14,10 @@ public class RecipeController {
 
     //TODO: WIRE UP PATCH REQUEST!
     @PatchMapping("/{id}")
-    public ResponseEntity<RecipeService> updateRecipe(@PathVariable int id){ // @RequestBody RecipeModel rb //TODO: SEE IF WE NEED TO CHANGE THIS TO RETURN SOMETHING ELSE! ID not a recipe service!
-        //MY RETURN TYPE SHOULD BE A RECIPE MODEL,
-        // _NOT_ A RECIPE SERVICE!
+    public ResponseEntity<RecipeService> updateRecipe(@PathVariable int id, @RequestBody String update){ // this SHOULD work, let's see.
+        //TODO: CHANGE TO ACCEPT A JSON OBJECT! --> future
+        // TODO: SEE IF WE NEED TO CHANGE THIS TO RETURN SOMETHING ELSE! ID not a recipe service!
+
 
         //deconstruct args, insert into below update statement
 
