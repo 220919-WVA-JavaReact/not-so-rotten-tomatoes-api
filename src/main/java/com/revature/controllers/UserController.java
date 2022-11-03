@@ -50,4 +50,5 @@ public class UserController {
         UserDTO userDTO = us.createUser(creds);
         return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
     }
+
 }

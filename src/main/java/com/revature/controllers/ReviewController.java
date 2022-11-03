@@ -8,10 +8,7 @@ import com.revature.entities.Role;
 import com.revature.services.ReviewService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,5 +27,17 @@ public class ReviewController {
     public ResponseEntity<List<Review>> getReviews(){
         List<Review> reviews = rs.getAllReviews();
         return new ResponseEntity<>(reviews, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Review> createReview(@RequestBody Review review){
+        review = rs.createReview(review);
+        return new ResponseEntity<>(review, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Review> deleteReviewById(@PathVariable("id") int id){
+        Review deleted = rs.deleteReviewById(id);
+        return new ResponseEntity<>(deleted, HttpStatus.OK);
     }
 }
