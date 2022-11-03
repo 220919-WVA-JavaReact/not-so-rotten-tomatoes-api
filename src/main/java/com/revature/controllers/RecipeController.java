@@ -1,4 +1,4 @@
-package controllers;
+package com.revature.controllers;
 
 import com.revature.services.RecipeService;
 import org.hibernate.exception.GenericJDBCException;
