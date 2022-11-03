@@ -20,8 +20,6 @@ public class Recipe {
     private String instructions;
     @Enumerated(EnumType.STRING)
     private Category category;
-//    @OneToMany(mappedBy = "recipe_id")
-//    Set<Review> reviews;
 
     public int getRecipe_id() {
         return recipe_id;

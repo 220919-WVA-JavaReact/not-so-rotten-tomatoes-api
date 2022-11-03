@@ -20,10 +20,6 @@ public class User {
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-//    @OneToMany(mappedBy = "author")
-//    Set<Review> reviews;
-//    @OneToMany(mappedBy = "author")
-//    Set<Recipe> recipes;
 
     public User() {
     }
@@ -73,7 +69,6 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
-
 
     @Override
     public boolean equals(Object o) {
