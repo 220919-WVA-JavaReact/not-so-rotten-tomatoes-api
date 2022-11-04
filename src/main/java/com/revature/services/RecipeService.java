@@ -1,6 +1,9 @@
 package com.revature.services;
 
+import com.revature.dtos.UserDTO;
 import com.revature.entities.Recipe;
+import com.revature.entities.User;
+import com.revature.exceptions.UserNotFoundException;
 import com.revature.repositories.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -29,12 +32,15 @@ public class RecipeService {
     // syntax for nativeQuery:: @Query(value = "SELECT * FROM USERS WHERE EMAIL_ADDRESS = ?1", nativeQuery = true)
     @Query("UPDATE recipes SET instructions = ?2 WHERE recipe_id = ?2 RETURNING *")
     public Recipe updateRecipe(int id, String update){
-        Recipe r = new Recipe();
+       // Recipe r = new Recipe();
         if (rr.findById(id).isPresent()){
+//            User user = ur.findById(id).orElseThrow(() -> new UserNotFoundException());
+//            UserDTO userDTO = new UserDTO(user);
+//
+//            return userDTO;
+            Optional<Recipe> updated = rr.findById(id);
+            return new Recipe(updated);
 
-            r.setRecipe_id(id);
-            r.setInstructions(update); //OBVIOUSLY, we will need to change this!
-            return r;
         } else {
             return null;
         }

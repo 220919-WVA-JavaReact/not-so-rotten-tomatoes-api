@@ -2,6 +2,7 @@ package com.revature.entities;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -20,6 +21,9 @@ public class Recipe {
     private String instructions;
     @Enumerated(EnumType.STRING)
     private Category category;
+
+    public Recipe(Optional<Recipe> updated) {
+    }
 
     public int getRecipe_id() {
         return recipe_id;
