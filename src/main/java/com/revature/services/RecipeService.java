@@ -32,14 +32,16 @@ public class RecipeService {
     @Query("UPDATE recipes SET instructions = ?2 WHERE recipe_id = ?2 RETURNING *")
     public Recipe updateRecipe(int id, String update){
         Recipe r = new Recipe();
-        if (findById(id).isPresent()){
+//        if (findById(id).isPresent()){
+//
+//            r.setInstructions(update); //OBVIOUSLY, we will need to change this!
+//            return r;
+//        } else {
+//            return null;
+//        }
 
-            r.setInstructions(update); //OBVIOUSLY, we will need to change this!
-            return r;
-        } else {
-            return null;
-        }
-
+        r.setInstructions(update); //OBVIOUSLY, we will need to change this!
+           return r;
     }
 
     public Optional<Recipe> findById(int id){
