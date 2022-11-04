@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import com.revature.annotations.Secured;
 import com.revature.dtos.Credentials;
 import com.revature.dtos.UserDTO;
 import com.revature.entities.Role;
@@ -22,6 +23,7 @@ public class UserController {
     }
 
     //RequestParam is used for retrieving query params
+    @Secured(rolesAllowed = "ADMIN")
     @GetMapping
     public ResponseEntity<List<UserDTO>> getUsers(@RequestParam(name="role", required = false) Role role){
         List<UserDTO> users = null;

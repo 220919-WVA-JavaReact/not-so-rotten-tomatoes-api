@@ -26,9 +26,21 @@ public class GlobalExceptionHandler {
         log.error("Exception caught: ", e);
     }
 
-    @ResponseStatus(value= HttpStatus.FOUND, reason = "User not found.")
+    @ResponseStatus(value= HttpStatus.FOUND, reason = "Review not found.")
     @ExceptionHandler(ReviewNotFoundException.class)
     public void handleReviewNotFoundException(Exception e) {
+        log.error("Exception caught: ", e);
+    }
+
+    @ResponseStatus(value= HttpStatus.UNAUTHORIZED, reason = "Unable to process request; please sign in.")
+    @ExceptionHandler(AuthenticationException.class)
+    public void handleAuthenticationException(Exception e) {
+        log.error("Exception caught: ", e);
+    }
+
+    @ResponseStatus(value= HttpStatus.UNAUTHORIZED, reason = "You do not have permission to perform this action.")
+    @ExceptionHandler(AuthorizationException.class)
+    public void handleAuthorizationException(Exception e) {
         log.error("Exception caught: ", e);
     }
 }
