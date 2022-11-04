@@ -29,17 +29,18 @@ public class SecurityAspect {
     }
     @Around("@annotation(com.revature.annotations.Secured)")
     public Object secure(ProceedingJoinPoint pjp) throws Throwable {
-
+        //retrieve method with @Secured
         Method method = ((MethodSignature) pjp.getSignature()).getMethod();
-
+        // retrieve the annotation
         Secured securedAnnotation = method.getAnnotation(Secured.class);
-
+        //retrieve the allowed roles for the method
         List<String> allowedRoles = Arrays.asList(securedAnnotation.rolesAllowed());
 
+        //retrieve the token from the request
         String token = req.getHeader("Authorization");
-
+        //extract the token information
         UserDTO user = ts.extractTokenDetails(token);
-
+        //check the token against the given annotation requirements to see if it should proceed or not.
         if(!allowedRoles.contains(user.getRole().toString())){
             throw new AuthorizationException();
         }
