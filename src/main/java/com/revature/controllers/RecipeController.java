@@ -3,6 +3,7 @@ package com.revature.controllers;
 
 import com.revature.entities.Recipe;
 import com.revature.services.RecipeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,11 +20,11 @@ public class RecipeController {
 
     //TODO: WIRE UP PATCH REQUEST!
     @PatchMapping("/{id}")
-    public ResponseEntity<RecipeService> updateRecipe(@PathVariable int id, @RequestBody String update){ // this SHOULD work, let's see.
+    public ResponseEntity<Recipe> updateRecipe(@PathVariable int id, @RequestBody String update){ // this SHOULD work, let's see.
         //TODO: CHANGE TO ACCEPT A JSON OBJECT! --> future
         // TODO: SEE IF WE NEED TO CHANGE THIS TO RETURN SOMETHING ELSE! ID not a recipe service!
 
-        rs.updateRecipe(id, update); //TODO: CHANGE ME!
+        return new ResponseEntity<>(rs.updateRecipe(id, update), HttpStatus.OK ); //TODO: CHANGE ME!
         //deconstruct args, insert into below update statement
 
 //        try {
@@ -36,12 +37,9 @@ public class RecipeController {
 //            h.printStackTrace();
 //        }
 
-        return ResponseEntity.ok().build(); //just to see that we get *A* response!
+//        return ResponseEntity.ok().build(); //just to see that we get *A* response!
     }
 
-
-
-    RecipeService rs;
     public RecipeController(RecipeService rs){
         this.rs = rs;
     }
