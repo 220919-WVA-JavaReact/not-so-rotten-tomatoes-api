@@ -22,7 +22,17 @@ public class Recipe {
     @Enumerated(EnumType.STRING)
     private Category category;
 
+    public Recipe(){}
+    public Recipe(int recipe_id, User author, String recipe_name, String instructions, Category category) {
+        this.recipe_id = recipe_id;
+        this.author = author;
+        this.recipe_name = recipe_name;
+        this.instructions = instructions;
+        this.category = category;
+    }
+
     public Recipe(Optional<Recipe> updated) {
+       // this.instructions = String.valueOf(updated);
     }
 
     public int getRecipe_id() {

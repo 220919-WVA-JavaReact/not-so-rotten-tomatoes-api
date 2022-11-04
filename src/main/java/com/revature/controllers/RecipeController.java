@@ -19,7 +19,7 @@ public class RecipeController {
     private RecipeService rs;
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Recipe> updateRecipe(@PathVariable int id, @RequestBody String update){
+    public ResponseEntity<Recipe> updateRecipe(@PathVariable int id, @RequestBody String update){ //TODO: UPDATE ME TO TAKE AN OBJECT!
 
 
         return new ResponseEntity<>(rs.updateRecipe(id, update), HttpStatus.OK ); //TODO: I NEED TO SEND BACK THE WHOLE TICKET !

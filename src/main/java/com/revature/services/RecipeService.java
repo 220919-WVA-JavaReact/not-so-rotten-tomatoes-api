@@ -1,9 +1,6 @@
 package com.revature.services;
 
-import com.revature.dtos.UserDTO;
 import com.revature.entities.Recipe;
-import com.revature.entities.User;
-import com.revature.exceptions.UserNotFoundException;
 import com.revature.repositories.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -39,7 +36,10 @@ public class RecipeService {
 //
 //            return userDTO;
             Optional<Recipe> updated = rr.findById(id);
-            return new Recipe(updated);
+
+            Recipe up = new Recipe(updated);
+          //  up.setInstructions(update);
+            return up; //currently, returning NOTHING !
 
         } else {
             return null;
