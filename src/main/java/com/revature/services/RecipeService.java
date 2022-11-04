@@ -23,8 +23,6 @@ public class RecipeService {
         return rr.findAll();
     }
 
-    //I NOW directly call recipe repository r.updateById(id, update) or some such. I  may need to be manually done, we will see.
-    //TODO: RESEARCH HOW PATCH REQUESTS WORK IN JPA repository!
     //@Query("UPDATE recipes SET instructions = ?2 WHERE recipe_id = ?2 RETURNING *")
     //Recipe update(int id, String update)
     //if this does not work, try with nativeQuery = true in the above query string.
@@ -32,8 +30,9 @@ public class RecipeService {
     @Query("UPDATE recipes SET instructions = ?2 WHERE recipe_id = ?2 RETURNING *")
     public Recipe updateRecipe(int id, String update){
         Recipe r = new Recipe();
-        if (findById(id).isPresent()){
+        if (rr.findById(id).isPresent()){
 
+            r.setRecipe_id(id);
             r.setInstructions(update); //OBVIOUSLY, we will need to change this!
             return r;
         } else {

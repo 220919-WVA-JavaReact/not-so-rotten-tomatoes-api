@@ -18,13 +18,11 @@ public class RecipeController {
     @Autowired
     private RecipeService rs;
 
-    //TODO: WIRE UP PATCH REQUEST!
     @PatchMapping("/{id}")
-    public ResponseEntity<Recipe> updateRecipe(@PathVariable int id, @RequestBody String update){ // this SHOULD work, let's see.
-        //TODO: CHANGE TO ACCEPT A JSON OBJECT! --> future
-        // TODO: SEE IF WE NEED TO CHANGE THIS TO RETURN SOMETHING ELSE! ID not a recipe service!
+    public ResponseEntity<Recipe> updateRecipe(@PathVariable int id, @RequestBody String update){
 
-        return new ResponseEntity<>(rs.updateRecipe(id, update), HttpStatus.OK ); //TODO: CHANGE ME!
+
+        return new ResponseEntity<>(rs.updateRecipe(id, update), HttpStatus.OK ); //TODO: I NEED TO SEND BACK THE WHOLE TICKET !
         //deconstruct args, insert into below update statement
 
 //        try {
