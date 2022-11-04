@@ -31,7 +31,7 @@ public class AuthController {
         UserDTO user = as.authenticate(login);
         String token = ts.generateToken(user);
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorzation", token);
+        headers.set("Authorization", token);
         return new ResponseEntity<>(user, headers, HttpStatus.OK);
     }
 

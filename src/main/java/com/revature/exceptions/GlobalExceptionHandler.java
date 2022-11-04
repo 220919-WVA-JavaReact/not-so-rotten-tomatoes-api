@@ -1,5 +1,6 @@
 package com.revature.exceptions;
 
+import com.revature.entities.Review;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,24 @@ public class GlobalExceptionHandler {
     @ResponseStatus(value= HttpStatus.BAD_REQUEST, reason = "Login unsuccessful.")
     @ExceptionHandler(LoginException.class)
     public void handleLoginException(Exception e) {
+        log.error("Exception caught: ", e);
+    }
+
+    @ResponseStatus(value= HttpStatus.FOUND, reason = "Review not found.")
+    @ExceptionHandler(ReviewNotFoundException.class)
+    public void handleReviewNotFoundException(Exception e) {
+        log.error("Exception caught: ", e);
+    }
+
+    @ResponseStatus(value= HttpStatus.UNAUTHORIZED, reason = "Unable to process request; please sign in.")
+    @ExceptionHandler(AuthenticationException.class)
+    public void handleAuthenticationException(Exception e) {
+        log.error("Exception caught: ", e);
+    }
+
+    @ResponseStatus(value= HttpStatus.UNAUTHORIZED, reason = "You do not have permission to perform this action.")
+    @ExceptionHandler(AuthorizationException.class)
+    public void handleAuthorizationException(Exception e) {
         log.error("Exception caught: ", e);
     }
 }

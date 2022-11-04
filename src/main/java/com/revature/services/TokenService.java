@@ -3,6 +3,7 @@ package com.revature.services;
 import com.revature.dtos.UserDTO;
 import com.revature.entities.Role;
 import com.revature.entities.User;
+import com.revature.exceptions.AuthenticationException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class TokenService {
 
         if (token == null) {
             //Throw AuthenticationException
+            throw new AuthenticationException();
         }
         String[] tokens = token.split(":");
         Integer id = Integer.valueOf(tokens[0]);
@@ -35,6 +37,9 @@ public class TokenService {
 
         User user = ur.findById(id).orElseThrow(() -> new UserNotFoundException());
 
+        if (!user.getRole().equals(role)){
+            new AuthenticationException();
+        }
         //validation behavior making sure the dto has the right role, otherwise throw another exception.
         return new UserDTO(user);
     }
