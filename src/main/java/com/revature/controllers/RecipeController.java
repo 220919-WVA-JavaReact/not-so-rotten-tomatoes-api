@@ -5,10 +5,7 @@ import com.revature.entities.Recipe;
 import com.revature.services.RecipeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -26,7 +23,7 @@ public class RecipeController {
         //TODO: CHANGE TO ACCEPT A JSON OBJECT! --> future
         // TODO: SEE IF WE NEED TO CHANGE THIS TO RETURN SOMETHING ELSE! ID not a recipe service!
 
-
+        rs.updateRecipe(id, update); //TODO: CHANGE ME!
         //deconstruct args, insert into below update statement
 
 //        try {

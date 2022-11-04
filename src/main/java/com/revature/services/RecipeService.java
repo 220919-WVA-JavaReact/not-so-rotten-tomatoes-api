@@ -31,9 +31,14 @@ public class RecipeService {
     // syntax for nativeQuery:: @Query(value = "SELECT * FROM USERS WHERE EMAIL_ADDRESS = ?1", nativeQuery = true)
     @Query("UPDATE recipes SET instructions = ?2 WHERE recipe_id = ?2 RETURNING *")
     public Recipe updateRecipe(int id, String update){
-        Recipe r = new Recipe();
-        r.setInstructions(update); //OBVIOUSLY, we will need to change this!
-        return r;
+        if (findById(id).isPresent()){
+            Recipe r = new Recipe();
+            r.setInstructions(update); //OBVIOUSLY, we will need to change this!
+            return r;
+        } else {
+            return null;
+        }
+
     }
 
     public Optional<Recipe> findById(int id){
