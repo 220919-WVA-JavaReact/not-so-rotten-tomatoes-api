@@ -48,4 +48,9 @@ public class ReviewService {
         rr.delete(review);
         return review;
     }
+
+    public Review getReviewById(int id) {
+        Review review = rr.findById(id).orElseThrow(() -> new ReviewNotFoundException());
+        return review;
+    }
 }
