@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RecipeService {
@@ -32,6 +33,12 @@ public class RecipeService {
     public Recipe updateRecipe(int id, String update){
         Recipe r = new Recipe();
         r.setInstructions(update); //OBVIOUSLY, we will need to change this!
+        return r;
     }
 
+    public Optional<Recipe> findById(int id){
+        //isPresent() will return true if an object is returned, false if no object.
+        //we can use this for verify on this method!
+        return rr.findById(String.valueOf(id));
+    }
 }
