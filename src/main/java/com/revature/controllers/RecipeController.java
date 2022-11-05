@@ -20,7 +20,7 @@ public class RecipeController {
     private RecipeService rs;
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Recipe> updateRecipe(@PathVariable int id, @RequestBody String update){
+    public ResponseEntity<Recipe> updateRecipe(@PathVariable int id, @RequestBody Recipe update){
         //TODO: UPDATE ME TO TAKE AN OBJECT!
         //TODO: RS.UPDATE CAN UPDATE TITLE, AS WELL AS CATEGORY.
       //TODO: insert an array list of the values to update, extract in that method and set each field to the value, then return back. Easy enough, right?

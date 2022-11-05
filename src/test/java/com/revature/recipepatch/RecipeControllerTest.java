@@ -22,16 +22,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class RecipeControllerTest { //TODO: I SHOULD ONLY TEST SERVICE LAYER METHODS!
 
     private RecipeController mockController;
-    @Test
-    void canGetAResponseOf200(){
-        //CURRENTLY, only a PATCH to /recipes/:id will work!
-        //Arrange,
-       // mockController = mockController.updateRecipe(1, "update");
-
-        //Act,
-        HttpStatus r = HttpStatus.valueOf(200);
-        Mockito.when(mockController.updateRecipe(1, "update")).thenReturn(new ResponseEntity<>(r));
-        //TODO: GET OUT OF THESE WEEDS!
-        //Assert
-    }
+//    @Test
+//    void canGetAResponseOf200(){
+//        //CURRENTLY, only a PATCH to /recipes/:id will work!
+//        //Arrange,
+//       // mockController = mockController.updateRecipe(1, "update");
+//
+//        //Act,
+//        HttpStatus r = HttpStatus.valueOf(200);
+//        Mockito.when(mockController.updateRecipe(1, "update")).thenReturn(new ResponseEntity<>(r));
+//        //TODO: GET OUT OF THESE WEEDS!
+//        //Assert
+//    }
 }
