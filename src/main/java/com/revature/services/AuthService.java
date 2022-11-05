@@ -3,7 +3,7 @@ package com.revature.services;
 import com.revature.dtos.LoginDTO;
 import com.revature.dtos.UserDTO;
 import com.revature.entities.User;
-import com.revature.exceptions.LoginException;
+import com.revature.repositories.exceptions.LoginException;
 import com.revature.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

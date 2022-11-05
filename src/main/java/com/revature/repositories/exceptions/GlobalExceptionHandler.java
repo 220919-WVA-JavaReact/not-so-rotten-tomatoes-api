@@ -1,6 +1,5 @@
-package com.revature.exceptions;
+package com.revature.repositories.exceptions;
 
-import com.revature.entities.Review;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -43,4 +42,8 @@ public class GlobalExceptionHandler {
     public void handleAuthorizationException(Exception e) {
         log.error("Exception caught: ", e);
     }
+
+    @ResponseStatus(value= HttpStatus.FOUND, reason = "Recipe not found.")
+    @ExceptionHandler(RecipeNotFoundException.class)
+    public void handleRecipeNotFoundException(Exception e){ log.error("Exception caught:", e); }
 }

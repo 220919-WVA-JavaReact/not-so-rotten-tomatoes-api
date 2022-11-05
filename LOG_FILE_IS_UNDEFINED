@@ -1,3 +1,29 @@
+<<<<<<< HEAD
+2022-11-04 12:59:31.120 TRACE 25392 --- [restartedMain] com.revature.aspects.LoggingAspect       : CorsConfig:addCorsMappings invoked with provided arguments: [org.springframework.web.servlet.config.annotation.CorsRegistry@3ed77133]
+2022-11-04 12:59:31.133 TRACE 25392 --- [restartedMain] com.revature.aspects.LoggingAspect       : CorsConfig:addCorsMappings successfully returned with the value: null
+2022-11-04 13:02:07.178 TRACE 25392 --- [http-nio-8080-exec-1] com.revature.aspects.LoggingAspect       : RecipeController:updateRecipe invoked with provided arguments: [1, {
+    "update": "this is the updated ticket!"
+}]
+2022-11-04 13:02:07.188 TRACE 25392 --- [http-nio-8080-exec-1] com.revature.aspects.LoggingAspect       : RecipeService:updateRecipe invoked with provided arguments: [1, {
+    "update": "this is the updated ticket!"
+}]
+2022-11-04 13:02:07.242 TRACE 25392 --- [http-nio-8080-exec-1] com.revature.aspects.LoggingAspect       : RecipeService:updateRecipe successfully returned with the value: Provided id of the wrong type for class com.revature.entities.Recipe. Expected: class java.lang.Integer, got class java.lang.String; nested exception is java.lang.IllegalArgumentException: Provided id of the wrong type for class com.revature.entities.Recipe. Expected: class java.lang.Integer, got class java.lang.String
+2022-11-04 13:02:07.243 TRACE 25392 --- [http-nio-8080-exec-1] com.revature.aspects.LoggingAspect       : RecipeController:updateRecipe successfully returned with the value: Provided id of the wrong type for class com.revature.entities.Recipe. Expected: class java.lang.Integer, got class java.lang.String; nested exception is java.lang.IllegalArgumentException: Provided id of the wrong type for class com.revature.entities.Recipe. Expected: class java.lang.Integer, got class java.lang.String
+2022-11-04 13:06:07.076 TRACE 15636 --- [restartedMain] com.revature.aspects.LoggingAspect       : CorsConfig:addCorsMappings invoked with provided arguments: [org.springframework.web.servlet.config.annotation.CorsRegistry@d9ed6d1]
+2022-11-04 13:06:07.083 TRACE 15636 --- [restartedMain] com.revature.aspects.LoggingAspect       : CorsConfig:addCorsMappings successfully returned with the value: null
+2022-11-04 13:06:19.201 TRACE 15636 --- [http-nio-8080-exec-2] com.revature.aspects.LoggingAspect       : RecipeController:updateRecipe invoked with provided arguments: [1, {
+    "update": "this is the updated ticket!"
+}]
+2022-11-04 13:06:19.209 TRACE 15636 --- [http-nio-8080-exec-2] com.revature.aspects.LoggingAspect       : RecipeService:updateRecipe invoked with provided arguments: [1, {
+    "update": "this is the updated ticket!"
+}]
+2022-11-04 13:06:19.228 TRACE 15636 --- [http-nio-8080-exec-2] com.revature.aspects.LoggingAspect       : RecipeService:updateRecipe successfully returned with the value: Recipe{recipe_id=0, author=null, recipe_name='null', instructions='{
+    "update": "this is the updated ticket!"
+}', category=null}
+2022-11-04 13:06:19.231 TRACE 15636 --- [http-nio-8080-exec-2] com.revature.aspects.LoggingAspect       : RecipeController:updateRecipe successfully returned with the value: <200 OK OK,Recipe{recipe_id=0, author=null, recipe_name='null', instructions='{
+    "update": "this is the updated ticket!"
+}', category=null},[]>
+=======
 2022-11-04 09:59:57.384 TRACE 14344 --- [restartedMain] com.revature.aspects.LoggingAspect       : CorsConfig:addCorsMappings invoked with provided arguments: [org.springframework.web.servlet.config.annotation.CorsRegistry@63e08c5f]
 2022-11-04 09:59:57.393 TRACE 14344 --- [restartedMain] com.revature.aspects.LoggingAspect       : CorsConfig:addCorsMappings successfully returned with the value: null
 2022-11-04 10:01:42.367 TRACE 14344 --- [http-nio-8080-exec-2] com.revature.aspects.LoggingAspect       : ReviewController:getReviews invoked with provided arguments: []
@@ -22,3 +48,4 @@
 2022-11-04 10:07:11.916 TRACE 14344 --- [http-nio-8080-exec-9] com.revature.aspects.LoggingAspect       : ReviewService:deleteReviewById invoked with provided arguments: [1]
 2022-11-04 10:07:11.939 TRACE 14344 --- [http-nio-8080-exec-9] com.revature.aspects.LoggingAspect       : ReviewService:deleteReviewById successfully returned with the value: Review{review_id=1, author=User{user_id=1, username='12cwarden', email='12cwarden@gmail.com', password='test', role=USER}, review_text='test value', recipe_id=Recipe{recipe_id=1, author=User{user_id=1, username='12cwarden', email='12cwarden@gmail.com', password='test', role=USER}, recipe_name='Cake', instructions='bake', category=Dessert}}
 2022-11-04 10:07:11.939 TRACE 14344 --- [http-nio-8080-exec-9] com.revature.aspects.LoggingAspect       : ReviewController:deleteReviewById successfully returned with the value: <200 OK OK,Review{review_id=1, author=User{user_id=1, username='12cwarden', email='12cwarden@gmail.com', password='test', role=USER}, review_text='test value', recipe_id=Recipe{recipe_id=1, author=User{user_id=1, username='12cwarden', email='12cwarden@gmail.com', password='test', role=USER}, recipe_name='Cake', instructions='bake', category=Dessert}},[]>
+>>>>>>> 3eb34fe5f0685b9a86cdce32ad72de7c6dd147e2
