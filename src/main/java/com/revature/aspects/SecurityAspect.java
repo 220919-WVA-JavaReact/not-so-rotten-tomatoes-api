@@ -2,7 +2,7 @@ package com.revature.aspects;
 
 import com.revature.annotations.Secured;
 import com.revature.dtos.UserDTO;
-import com.revature.exceptions.AuthorizationException;
+import com.revature.repositories.exceptions.AuthorizationException;
 import com.revature.services.TokenService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -11,7 +11,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;

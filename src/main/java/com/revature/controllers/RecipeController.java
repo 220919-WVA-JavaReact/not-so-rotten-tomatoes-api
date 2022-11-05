@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 
 import java.util.List;
@@ -22,20 +23,16 @@ public class RecipeController {
     public ResponseEntity<Recipe> updateRecipe(@PathVariable int id, @RequestBody String update){ //TODO: UPDATE ME TO TAKE AN OBJECT!
 
 
-        return new ResponseEntity<>(rs.updateRecipe(id, update), HttpStatus.OK ); //TODO: I NEED TO SEND BACK THE WHOLE TICKET !
-        //deconstruct args, insert into below update statement
+      //  return new ResponseEntity<>(rs.updateRecipe(id, update), HttpStatus.OK ); //TODO: I NEED TO SEND BACK THE WHOLE TICKET !
+        try {
+//
+            Recipe re = rs.updateRecipe(id, update); //if re is null, error, else, proceed.
+            return new ResponseEntity<>(re, HttpStatus.OK);
+        } catch (HttpClientErrorException h) {
+            h.printStackTrace();
+        }
 
-//        try {
-//           // RecipeModel rm = RecipeService.update(id, rb.getInstructions()); //THIS IS FUTURE-PROOFING. We don't want to simply pass an int and a string in say, an array, then pull it out -- in future, we might want to update additional fields than just instructions ie
-//            //TODO: IF ABOVE IS NULL, ERROR
-//            //ELSE, PROCEED
-//            return ResponseEntity.ok().build();
-//        } catch (GenericJDBCException h){ //TODO: CREATE CUSTOM EXCEPTION, PASS HERE!
-//           // return ResponseEntity.notFound().build();
-//            h.printStackTrace();
-//        }
-
-//        return ResponseEntity.ok().build(); //just to see that we get *A* response!
+       return ResponseEntity.ok().build(); //just to see that we get *A* response!
     }
 
     public RecipeController(RecipeService rs){

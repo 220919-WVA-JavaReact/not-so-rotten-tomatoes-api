@@ -1,13 +1,12 @@
 package com.revature.services;
 
 import com.revature.entities.Recipe;
-import com.revature.exceptions.RecipeNotFoundException;
+import com.revature.repositories.exceptions.RecipeNotFoundException;
 import com.revature.repositories.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RecipeService {
