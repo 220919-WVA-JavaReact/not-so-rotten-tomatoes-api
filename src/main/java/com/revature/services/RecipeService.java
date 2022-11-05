@@ -4,7 +4,6 @@ import com.revature.entities.Recipe;
 import com.revature.exceptions.RecipeNotFoundException;
 import com.revature.repositories.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class RecipeService {
         try {
              recipe = rr.updateInstructions(id, update);
         } catch (RecipeNotFoundException r){
-            r.getMessage();
+            r.getClass(); //currently ignored. Proceed?
         }
 
         // I need to return Optional<Recipe> if I want to use
