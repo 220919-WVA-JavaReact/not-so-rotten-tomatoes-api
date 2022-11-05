@@ -27,17 +27,14 @@ public class RecipeController {
         ResponseEntity res = null;
         try {
             Recipe re = rs.updateRecipe(id, update); //if re is null, error, else, proceed.
-
             if (re == null){
                 res = ResponseEntity.badRequest().build();
             } else {
                 res = new ResponseEntity<>(re, HttpStatus.OK);
             }
-
         } catch (HttpClientErrorException h) {
             h.printStackTrace();
         }
-
        return res;
     }
 

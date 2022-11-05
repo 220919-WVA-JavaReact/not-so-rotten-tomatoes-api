@@ -24,15 +24,15 @@ public class RecipeService {
 
 
     public Recipe updateRecipe(int id, String update) throws RecipeNotFoundException{
+        Recipe updated = null;
         Recipe recipe = null;
         try {
-             recipe = rr.updateInstructions(id, update);
+             recipe = rr.getOne(id); //THIS SHOULD WORK!
+             recipe.setInstructions(update);
+             recipe = rr.save(recipe);
         } catch (RecipeNotFoundException r){
             r.getClass(); //currently ignored. Proceed?
         }
-
-        // I need to return Optional<Recipe> if I want to use
-        //the .orElseThrow method.Howver, I only want to return either a recipe or null , here.
     return recipe;
 
     }
