@@ -23,16 +23,22 @@ public class RecipeController {
     public ResponseEntity<Recipe> updateRecipe(@PathVariable int id, @RequestBody String update){ //TODO: UPDATE ME TO TAKE AN OBJECT!
 
 
-      //  return new ResponseEntity<>(rs.updateRecipe(id, update), HttpStatus.OK ); //TODO: I NEED TO SEND BACK THE WHOLE TICKET !
+      //TODO: I NEED TO SEND BACK THE WHOLE TICKET !
+        ResponseEntity res = null;
         try {
-//
             Recipe re = rs.updateRecipe(id, update); //if re is null, error, else, proceed.
-            return new ResponseEntity<>(re, HttpStatus.OK);
+
+            if (re == null){
+                res = ResponseEntity.badRequest().build();
+            } else {
+                res = new ResponseEntity<>(re, HttpStatus.OK);
+            }
+
         } catch (HttpClientErrorException h) {
             h.printStackTrace();
         }
 
-       return ResponseEntity.ok().build(); //just to see that we get *A* response!
+       return res;
     }
 
     public RecipeController(RecipeService rs){
