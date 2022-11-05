@@ -10,4 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Integer> {
+    //TODO WHEN BACK FROM BREAKKY:: I NEED TO DEFINE MY METHODS HERE!
 }
