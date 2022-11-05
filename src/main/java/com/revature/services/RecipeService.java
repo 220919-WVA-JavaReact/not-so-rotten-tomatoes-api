@@ -33,7 +33,8 @@ public class RecipeService {
         Recipe newRecipe = null;
         try {
              newRecipe = rr.getOne(id);
-             //note: error handling is already taken care of, no need to check this value. Will return a 400 bad request, saying
+             //note: error handling is already taken care of, no need to check this value.
+            // Will return a 400 bad request, saying
             //that no recipe exists with that id.
 
              //set new infos, save to db
