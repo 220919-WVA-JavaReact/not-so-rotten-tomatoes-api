@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
-//    @Query(value = "SELECT (*) FROM recipes WHERE recipe_id = ?1")
     Recipe getOne(int id);
 
-   // @Query("UPDATE Recipe SET instructions = ?2 WHERE recipe_id = ?1")
-    Recipe save(String update);
+    //@DOCS: getOne only fetches a REFERENCE (proxy) of the object, then the below save executes an UPDATE statement as you expect.
+    //@DOCS: see https://stackoverflow.com/questions/39741102/how-to-beautifully-update-a-jpa-entity-in-spring-data --> first answer for more infos
+    Recipe save(Recipe update);
 }

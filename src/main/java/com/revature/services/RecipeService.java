@@ -27,7 +27,7 @@ public class RecipeService {
 
         Recipe recipe = null;
         try {
-             recipe = rr.getOne(id); //THIS SHOULD WORK!
+             recipe = rr.getOne(id);
              recipe.setInstructions(update);
              recipe = rr.save(recipe);
         } catch (RecipeNotFoundException r){
