@@ -24,7 +24,7 @@ public class RecipeService {
 
 
     public Recipe updateRecipe(int id, String update) throws RecipeNotFoundException{
-        Recipe updated = null;
+
         Recipe recipe = null;
         try {
              recipe = rr.getOne(id); //THIS SHOULD WORK!
