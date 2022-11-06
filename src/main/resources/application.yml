@@ -6,9 +6,20 @@
 #  jpa:
 #    database-platform: org.hibernate.dialect.PostgreSQLDialect
 #    hibernate:
-#      ddl-auto: create #Specifies hwo Hibernate should act w database.
+#      ddl-auto: validate #Specifies hwo Hibernate should act w database.
 #      show-sql: true
 spring:
   profiles:
     active:
       - "@profileActive"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - "*"
+
+server:
+  error:
+    include-stacktrace: never

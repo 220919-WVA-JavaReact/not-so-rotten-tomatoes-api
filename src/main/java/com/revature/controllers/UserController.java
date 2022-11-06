@@ -1,5 +1,6 @@
 package com.revature.controllers;
 
+import com.revature.annotations.Secured;
 import com.revature.dtos.Credentials;
 import com.revature.dtos.UserDTO;
 import com.revature.entities.Role;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService us;
@@ -21,7 +23,8 @@ public class UserController {
     }
 
     //RequestParam is used for retrieving query params
-    @GetMapping("/users")
+    @Secured(rolesAllowed = "ADMIN")
+    @GetMapping
     public ResponseEntity<List<UserDTO>> getUsers(@RequestParam(name="role", required = false) Role role){
         List<UserDTO> users = null;
         //If no request parms, return all users
@@ -33,19 +36,21 @@ public class UserController {
             return new ResponseEntity<>(users, HttpStatus.OK);
         }
 
+
     }
 
     //PathVariable is used for mapping to variable given in map request
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable("id") int id){
             UserDTO userDTO = us.getUserById(id);
             //User is found, returning userDTO Status 200
             return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
 
-    @PostMapping("/users")
+    @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody Credentials creds) {
         UserDTO userDTO = us.createUser(creds);
         return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
     }
+
 }

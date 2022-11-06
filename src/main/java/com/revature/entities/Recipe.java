@@ -2,6 +2,7 @@ package com.revature.entities;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -9,7 +10,7 @@ import java.util.Set;
 public class Recipe {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int recipe_id;
     @ManyToOne
     @JoinColumn(name = "author", referencedColumnName = "user_id")
@@ -20,6 +21,19 @@ public class Recipe {
     private String instructions;
     @Enumerated(EnumType.STRING)
     private Category category;
+
+    public Recipe(){}
+    public Recipe(int recipe_id, User author, String recipe_name, String instructions, Category category) {
+        this.recipe_id = recipe_id;
+        this.author = author;
+        this.recipe_name = recipe_name;
+        this.instructions = instructions;
+        this.category = category;
+    }
+
+    public Recipe(Optional<Recipe> updated) {
+       // this.instructions = String.valueOf(updated);
+    }
 
     public int getRecipe_id() {
         return recipe_id;
