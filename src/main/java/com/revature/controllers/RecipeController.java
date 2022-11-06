@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/recipes")
@@ -21,6 +22,12 @@ public class RecipeController {
     @ResponseBody
     public ResponseEntity<List<Recipe>> getAllRecipes() {
         return new ResponseEntity<>(rs.getAllRecipes(), HttpStatus.OK);
+    }
+
+    @GetMapping(value="/{id}", produces="application/json")
+    @ResponseBody
+    public ResponseEntity<Optional<Recipe>> getRecipeById(@PathVariable("id") int id) {
+        return new ResponseEntity<>(rs.getRecipeById(id), HttpStatus.OK);
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
