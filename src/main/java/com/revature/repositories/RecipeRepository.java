@@ -13,5 +13,5 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     //@DOCS: see https://stackoverflow.com/questions/39741102/how-to-beautifully-update-a-jpa-entity-in-spring-data --> first answer for more infos
     Recipe save(Recipe update);
 
-    String delete(int id); //TODO: SEE TAHT THIS IS THE CORRECT METHOD!
+    String delete(int id); //TODO: IT REALLY ISN'T! UPDATE ME!!
 }
