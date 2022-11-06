@@ -36,6 +36,11 @@ public class RecipeController {
        return res;
     }
 
+    @DeleteMapping("/{id}")
+    public String deleteRecipe(@PathVariable int id){
+        //TODO: WRITE THIS ! I RETURN A STRING MESSAGE "Your recipe has been sucessfully deleted!"
+    }
+
     public RecipeController(RecipeService rs){
         this.rs = rs;
     }
