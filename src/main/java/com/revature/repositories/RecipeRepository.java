@@ -12,4 +12,6 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     //@DOCS: getOne only fetches a REFERENCE (proxy) of the object, then the below save executes an UPDATE statement as you expect.
     //@DOCS: see https://stackoverflow.com/questions/39741102/how-to-beautifully-update-a-jpa-entity-in-spring-data --> first answer for more infos
     Recipe save(Recipe update);
+
+    String delete(int id); //TODO: SEE TAHT THIS IS THE CORRECT METHOD!
 }

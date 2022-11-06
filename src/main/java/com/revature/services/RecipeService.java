@@ -49,5 +49,8 @@ public class RecipeService {
     return newRecipe;
 
     }
-
+    public String deleteRecipe(int id){
+        //TODO: BUILD ME !
+        return null;
+    }
 }
