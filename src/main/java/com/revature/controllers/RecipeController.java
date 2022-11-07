@@ -56,7 +56,4 @@ public class RecipeController {
     public ResponseEntity<Recipe> createUser(@RequestBody Recipe recipe) {
         return new ResponseEntity<>(rs.createRecipe(recipe), HttpStatus.CREATED);
     }
-
-
-
 }
