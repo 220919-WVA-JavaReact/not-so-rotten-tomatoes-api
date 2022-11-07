@@ -50,7 +50,7 @@ public class RecipeService {
 
     }
     public String deleteRecipe(int id){
-        //TODO: BUILD ME !
+        //TODO: new recipe, newRecipe.setId(id), then delete(newRecipe)
         return null;
     }
 }
