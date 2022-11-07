@@ -150,4 +150,33 @@ public class ReviewServiceTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void getReviewByAuthorWorks(){
+        User cory = new User();
+        cory.setUser_id(2);
+        Recipe testRecipe = new Recipe();
+        Review returnedReview = new Review();
+        returnedReview.setReview_id(1);
+        returnedReview.setAuthor(cory);
+        returnedReview.setReview_text("good food");
+        returnedReview.setRecipe_id(testRecipe);
+        List<Review> returned = new ArrayList<>();
+        returned.add(returnedReview);
+
+        Mockito.when(mockRepository.findByAuthor(cory)).thenReturn(returned);
+
+        Review expected = new Review();
+        expected.setReview_id(1);
+        expected.setAuthor(cory);
+        expected.setReview_text("good food");
+        expected.setRecipe_id(testRecipe);
+        List<Review> expect = new ArrayList<>();
+        expect.add(expected);
+
+        List<Review> actual = sut.getReviewsByAuthor(2);
+
+
+        assertEquals(expect, actual);
+    }
 }

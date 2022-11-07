@@ -1,30 +1,39 @@
 package com.revature.services;
 
 import com.revature.dtos.UserDTO;
-import com.revature.entities.Category;
 import com.revature.entities.Review;
-import com.revature.entities.Role;
 import com.revature.entities.User;
 import com.revature.exceptions.ReviewNotFoundException;
+import com.revature.exceptions.UserNotFoundException;
 import com.revature.repositories.ReviewRepository;
+import com.revature.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ReviewService {
 
     private ReviewRepository rr;
+    private UserRepository ur;
 
     @Autowired
-    public ReviewService(ReviewRepository rr) {
+    public ReviewService(ReviewRepository rr, UserRepository ur) {
         this.rr = rr;
+        this.ur = ur;
     }
+
 
     public List<Review> getAllReviews(){
         List<Review> reviews = rr.findAll();
+
+        return reviews;
+    }
+
+    public List<Review> getReviewsByAuthor(int id) {
+        User u = ur.findById(id).orElseThrow(UserNotFoundException::new);
+        List<Review> reviews = rr.findByAuthor(u);
 
         return reviews;
     }
