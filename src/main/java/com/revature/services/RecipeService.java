@@ -49,7 +49,7 @@ public class RecipeService {
     return newRecipe;
 
     }
-    public String deleteRecipe(int id){
+    public String deleteRecipe(int id) throws RecipeNotFoundException{
         //TODO: new recipe, newRecipe.setId(id), then delete(newRecipe)
         //TODO: DO I RETURN A STRING, OR AN OBJECT?
         Recipe deletedRecipe = null;
@@ -60,7 +60,8 @@ public class RecipeService {
             rr.delete(deletedRecipe);
             message = "Successfully deleted!"; //TODO: TEST I WORK !
         } catch (RecipeNotFoundException r){
-            r.getClass();
+            //throw r; //TODO: TEST I WORK!
+            throw new RecipeNotFoundException();
         }
 
         return message;
