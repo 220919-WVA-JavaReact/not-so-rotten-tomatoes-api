@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RecipeService {
@@ -23,6 +24,13 @@ public class RecipeService {
         return rr.findAll();
     }
 
+    public Recipe createRecipe(Recipe recipe) {
+        return rr.save(recipe);
+    }
+
+    public Optional<Recipe> getRecipeById(int id) {
+        return rr.findById(id);
+    }
 
     public Recipe updateRecipe(int id, Recipe update) throws RecipeNotFoundException{
 

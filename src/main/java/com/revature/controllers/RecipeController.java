@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 
-
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/recipes")
@@ -46,6 +46,14 @@ public class RecipeController {
         return new ResponseEntity<>(rs.getAllRecipes(), HttpStatus.OK);
     }
 
+    @GetMapping(value="/{id}", produces="application/json")
+    @ResponseBody
+    public ResponseEntity<Optional<Recipe>> getRecipeById(@PathVariable("id") int id) {
+        return new ResponseEntity<>(rs.getRecipeById(id), HttpStatus.OK);
+    }
 
-
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Recipe> createUser(@RequestBody Recipe recipe) {
+        return new ResponseEntity<>(rs.createRecipe(recipe), HttpStatus.CREATED);
+    }
 }

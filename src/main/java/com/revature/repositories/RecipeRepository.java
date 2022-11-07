@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
+
     Recipe getOne(int id);
 
     //@DOCS: getOne only fetches a REFERENCE (proxy) of the object, then the below save executes an UPDATE statement as you expect.
