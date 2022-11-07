@@ -51,6 +51,18 @@ public class RecipeService {
     }
     public String deleteRecipe(int id){
         //TODO: new recipe, newRecipe.setId(id), then delete(newRecipe)
-        return null;
+        //TODO: DO I RETURN A STRING, OR AN OBJECT?
+        Recipe deletedRecipe = null;
+        String message = null;
+
+        try {
+            deletedRecipe = rr.getOne(id);
+            rr.delete(deletedRecipe);
+            message = "Successfully deleted!"; //TODO: TEST I WORK !
+        } catch (RecipeNotFoundException r){
+            r.getClass();
+        }
+
+        return message;
     }
 }
