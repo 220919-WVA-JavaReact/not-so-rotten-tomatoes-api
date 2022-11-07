@@ -24,7 +24,6 @@ public class RecipeService {
         return rr.findAll();
     }
 
-<<<<<<< HEAD
     public Recipe createRecipe(Recipe recipe) {
         return rr.save(recipe);
     }
@@ -32,7 +31,6 @@ public class RecipeService {
     public Optional<Recipe> getRecipeById(int id) {
         return rr.findById(id);
     }
-=======
 
     public Recipe updateRecipe(int id, Recipe update) throws RecipeNotFoundException{
 
@@ -60,5 +58,4 @@ public class RecipeService {
 
     }
 
->>>>>>> dev
 }
