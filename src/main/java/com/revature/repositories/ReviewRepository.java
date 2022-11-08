@@ -19,5 +19,4 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
     List<Review> findByAuthor(User u);
 
     List<Review> findByRecipeid(Recipe r);
-
 }
