@@ -1,6 +1,6 @@
 package com.revature.services;
 
-<<<<<<< HEAD
+
 import com.revature.entities.Recipe;
 import com.revature.entities.Review;
 import com.revature.entities.User;
@@ -8,8 +8,7 @@ import com.revature.exceptions.RecipeNotFoundException;
 import com.revature.exceptions.ReviewNotFoundException;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.repositories.RecipeRepository;
-=======
->>>>>>> 5edc3cb536e01220689aea2be3b04ff956b54b94
+
 import com.revature.repositories.ReviewRepository;
 import com.revature.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
