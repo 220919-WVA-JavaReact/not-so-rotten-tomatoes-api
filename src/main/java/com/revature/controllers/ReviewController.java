@@ -53,6 +53,15 @@ public class ReviewController {
     }
 
     @Secured(rolesAllowed = {"ADMIN", "MODERATOR", "USER"})
+    @GetMapping("/recipe/{id}")
+    public ResponseEntity<List<Review>> getReviewsByRecipeId(@PathVariable("id") int id) {
+        List<Review> reviews = new ArrayList<>();
+        reviews = rs.getReviewsByRecipe(id);
+
+        return new ResponseEntity<>(reviews, HttpStatus.OK);
+    }
+
+    @Secured(rolesAllowed = {"ADMIN", "MODERATOR", "USER"})
     @PostMapping
     public ResponseEntity<Review> createReview(@RequestBody Review review){
         review = rs.createReview(review);

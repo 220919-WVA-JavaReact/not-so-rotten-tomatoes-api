@@ -21,6 +21,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 
 @SpringBootTest(classes= NsrtApplication.class)
 public class ReviewServiceTest {
@@ -164,7 +165,37 @@ public class ReviewServiceTest {
         List<Review> returned = new ArrayList<>();
         returned.add(returnedReview);
 
-        Mockito.when(mockRepository.findByAuthor(cory)).thenReturn(returned);
+        Mockito.when(mockRepository.findByAuthor(any(User.class))).thenReturn(returned);
+
+        Review expected = new Review();
+        expected.setReview_id(1);
+        expected.setAuthor(cory);
+        expected.setReview_text("good food");
+        expected.setRecipe_id(testRecipe);
+        List<Review> expect = new ArrayList<>();
+        expect.add(expected);
+        //System.out.println("RETURNED FUNCTION::" + returned);
+
+        List<Review> actual = sut.getReviewsByAuthor(2);
+
+
+        assertEquals(expect, actual);
+    }
+
+    @Test
+    public void getReviewByRecipeWorks(){
+        User cory = new User();
+        Recipe testRecipe = new Recipe();
+        testRecipe.setRecipe_id(2);
+        Review returnedReview = new Review();
+        returnedReview.setReview_id(1);
+        returnedReview.setAuthor(cory);
+        returnedReview.setReview_text("good food");
+        returnedReview.setRecipe_id(testRecipe);
+        List<Review> returned = new ArrayList<>();
+        returned.add(returnedReview);
+
+        Mockito.when(mockRepository.findByRecipeid(any(Recipe.class))).thenReturn(returned);
 
         Review expected = new Review();
         expected.setReview_id(1);
@@ -174,7 +205,8 @@ public class ReviewServiceTest {
         List<Review> expect = new ArrayList<>();
         expect.add(expected);
 
-        List<Review> actual = sut.getReviewsByAuthor(2);
+
+        List<Review> actual = sut.getReviewsByRecipe(2);
 
 
         assertEquals(expect, actual);

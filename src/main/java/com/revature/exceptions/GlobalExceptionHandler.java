@@ -20,6 +20,10 @@ public class GlobalExceptionHandler {
         log.error("Exception caught: ", e);
     }
 
+    @ResponseStatus(value= HttpStatus.FOUND, reason = "Recipe not found.")
+    @ExceptionHandler(RecipeNotFoundException.class)
+    public void handleRecipeNotFoundException(Exception e) { log.error("Exception caught: ", e); }
+
     @ResponseStatus(value= HttpStatus.BAD_REQUEST, reason = "Login unsuccessful.")
     @ExceptionHandler(LoginException.class)
     public void handleLoginException(Exception e) {
