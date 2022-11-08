@@ -1,7 +1,7 @@
 package com.revature.services;
 
 import com.revature.entities.Review;
-import com.revature.repositories.exceptions.ReviewNotFoundException;
+import com.revature.exceptions.ReviewNotFoundException;
 import com.revature.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

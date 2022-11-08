@@ -1,4 +1,4 @@
-package com.revature.repositories.exceptions;
+package com.revature.exceptions;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -4,7 +4,7 @@ import com.revature.NsrtApplication;
 import com.revature.dtos.UserDTO;
 import com.revature.entities.Role;
 import com.revature.entities.User;
-import com.revature.repositories.exceptions.UserNotFoundException;
+import com.revature.exceptions.UserNotFoundException;
 import com.revature.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

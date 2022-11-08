@@ -2,7 +2,7 @@ package com.revature.services;
 
 import com.revature.entities.Category;
 import com.revature.entities.Recipe;
-import com.revature.repositories.exceptions.RecipeNotFoundException;
+import com.revature.exceptions.RecipeNotFoundException;
 import com.revature.repositories.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
