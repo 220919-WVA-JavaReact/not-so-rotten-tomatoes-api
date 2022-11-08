@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RecipeService {
@@ -50,16 +51,27 @@ public class RecipeService {
 
     }
     public String deleteRecipe(int id) throws RecipeNotFoundException{
-        Recipe deletedRecipe = null;
+        Optional<Recipe> deletedRecipe;
         String message = null;
+        boolean exists;
 
         try {
-            deletedRecipe = rr.getOne(id);
-            rr.delete(deletedRecipe);
-            message = "Successfully deleted!"; //TODO: TEST I WORK !
-        } catch (RecipeNotFoundException r){ //TODO: WHY AM I NOT WORKING?
-            //throw r; //TODO: TEST I WORK!
-            throw new RecipeNotFoundException();
+
+            exists = rr.existsById(id); //returns a boolean,
+
+            if(!exists){ //TODO: TEST ME!
+                message = "Unable to delete that recipe!";
+            } else {
+                deletedRecipe = rr.findById(id);
+                //findById will throw IllegalArgumentException, however. Testing...
+                rr.delete(deletedRecipe);
+                message = "Successfully deleted!"; //TODO: TEST I WORK !
+            }
+
+        } catch (IllegalArgumentException r){ //TODO: WHY AM I NOT WORKING?
+          //  throw r; //TODO: TEST I WORK!
+            //throw new RecipeNotFoundException();
+            r.printStackTrace();
         }
 
         return message;

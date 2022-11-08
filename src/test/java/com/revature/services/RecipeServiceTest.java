@@ -58,7 +58,7 @@ public class RecipeServiceTest {
     @Test
     public void deleteThrowsRecNotFoundException(){
         Mockito.when(mockRepository.findById(1000)).thenReturn(Optional.empty());
-        assertThrows(RecipeNotFoundException.class, () -> sut.deleteRecipe(1000));
+        assertThrows(IllegalArgumentException.class, () -> sut.deleteRecipe(1000));
 
     }
 
