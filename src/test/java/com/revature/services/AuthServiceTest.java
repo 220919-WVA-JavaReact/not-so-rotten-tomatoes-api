@@ -6,7 +6,6 @@ import com.revature.dtos.UserDTO;
 import com.revature.entities.Role;
 import com.revature.entities.User;
 import com.revature.exceptions.LoginException;
-import com.revature.exceptions.UserNotFoundException;
 import com.revature.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
