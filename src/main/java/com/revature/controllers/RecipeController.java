@@ -37,10 +37,10 @@ public class RecipeController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteRecipe(@PathVariable int id){
+    public ResponseEntity deleteRecipe(@PathVariable int id){
         //TODO: WRITE THIS ! I RETURN A STRING MESSAGE "Your recipe has been sucessfully deleted!"
         //blaaahahahahah
-        return "this";
+        return (ResponseEntity) ResponseEntity.ok(); //TODO: FIX ME
     }
 
     public RecipeController(RecipeService rs){
