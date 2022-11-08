@@ -1,4 +1,4 @@
-package com.revature.repositories.exceptions;
+package com.revature.exceptions;
 
 public class AuthorizationException extends RuntimeException{
 }
