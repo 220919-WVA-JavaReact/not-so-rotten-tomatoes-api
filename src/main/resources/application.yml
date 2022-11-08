@@ -11,7 +11,7 @@
 spring:
   profiles:
     active:
-      - "@profileActive"
+      - "@profileActive@"
 
 management:
   endpoints:
@@ -19,7 +19,6 @@ management:
       exposure:
         include:
           - "*"
-
 server:
   error:
     include-stacktrace: never
