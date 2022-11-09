@@ -17,7 +17,8 @@ public class Review {
     @Column(nullable = false)
     private String review_text;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    //TODO: TRY DIFFERENT CASCADE TYPES!
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "recipe_id", referencedColumnName = "recipe_id")
     private Recipe recipe_id;
 

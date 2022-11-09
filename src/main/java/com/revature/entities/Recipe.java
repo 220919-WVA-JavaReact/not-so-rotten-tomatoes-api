@@ -22,7 +22,7 @@ public class Recipe {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-//    //TODO: TESTING HERE, CHANGED ENTITY RELATIONSHIP.
+//    //TODO: CLAIRE, YOU'RE GONNA HAVE TO BUILD IT YOURSELF.
 //    @OneToMany(cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
 //    @JoinColumn(name = "reviews", referencedColumnName = "review_id")
 //    private Review review;
