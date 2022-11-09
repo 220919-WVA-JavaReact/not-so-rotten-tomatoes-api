@@ -22,7 +22,8 @@ public class Recipe {
     @Enumerated(EnumType.STRING)
     private Category category;
 
-//    //TODO: CLAIRE, YOU'RE GONNA HAVE TO BUILD IT YOURSELF.
+//    //TODO: CLAIRE, CHECK OUR ERD ACTUAL, MIGHT AHVE TO DELETE FROM A JUNCTION (MANY TO MANY) TABLE
+    //TODO: TRY DIFFERENT CASCADE TYPES !!!!
 //    @OneToMany(cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
 //    @JoinColumn(name = "reviews", referencedColumnName = "review_id")
 //    private Review review;
