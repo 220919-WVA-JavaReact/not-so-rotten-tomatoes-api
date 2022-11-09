@@ -2,7 +2,9 @@ package com.revature.services;
 
 import com.revature.entities.Category;
 import com.revature.entities.Recipe;
-import com.revature.exceptions.RecipeNotFoundException;
+import com.revature.entities.User;
+import com.revature.exceptions.UserNotFoundException;
+import com.revature.repositories.UserRepository;
 import com.revature.repositories.RecipeRepository;
 import com.revature.exceptions.RecipeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,13 @@ import java.util.Optional;
 public class RecipeService {
 
     RecipeRepository rr;
+    UserRepository ur;
 
     @Autowired
-    public RecipeService(RecipeRepository rr) {
+    public RecipeService(RecipeRepository rr, UserRepository ur) {
+
         this.rr = rr;
+        this.ur = ur;
     }
 
     public List<Recipe> getAllRecipes() {
@@ -59,4 +64,13 @@ public class RecipeService {
 
     }
 
+    public List<Recipe> getRecipeByAuthorId(int id){
+        User u = ur.findById(id).orElseThrow(UserNotFoundException::new);
+        return rr.findRecipesByAuthor(u);
+    }
+
+    public List<Recipe> findByRecipeContains(String searchTerm) {
+        List<Recipe> res = rr.findByRecipeContains(searchTerm.toLowerCase());
+        return res;
+    }
 }
