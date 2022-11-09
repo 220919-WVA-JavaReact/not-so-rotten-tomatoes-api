@@ -52,8 +52,20 @@ public class RecipeController {
         return new ResponseEntity<>(rs.getRecipeById(id), HttpStatus.OK);
     }
 
+    @GetMapping(value="/users/{id}", produces="application/json")
+    @ResponseBody
+    public ResponseEntity<List<Recipe>> getRecipeByAuthorId(@PathVariable("id") int id) {
+        return new ResponseEntity<>(rs.getRecipeByAuthorId(id), HttpStatus.OK);
+    }
+
     @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<Recipe> createUser(@RequestBody Recipe recipe) {
         return new ResponseEntity<>(rs.createRecipe(recipe), HttpStatus.CREATED);
+    }
+
+    @GetMapping(value="/search/{searchTerm}", produces="application/json")
+    @ResponseBody
+    public ResponseEntity<List<Recipe>> search(@PathVariable("searchTerm") String searchTerm) {
+        return new ResponseEntity<>(rs.findByRecipeContains(searchTerm), HttpStatus.OK);
     }
 }
