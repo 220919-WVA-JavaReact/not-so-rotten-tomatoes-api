@@ -52,7 +52,7 @@ public class ReviewController {
         return new ResponseEntity<>(reviews, HttpStatus.OK);
     }
 
-    @Secured(rolesAllowed = {"ADMIN", "MODERATOR", "USER"})
+//    @Secured(rolesAllowed = {"ADMIN", "MODERATOR", "USER"})
     @GetMapping("/recipe/{id}")
     public ResponseEntity<List<Review>> getReviewsByRecipeId(@PathVariable("id") int id) {
         List<Review> reviews = new ArrayList<>();
