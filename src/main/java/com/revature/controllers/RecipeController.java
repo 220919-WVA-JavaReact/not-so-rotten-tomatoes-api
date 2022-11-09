@@ -40,10 +40,10 @@ public class RecipeController {
     public ResponseEntity deleteRecipe(@PathVariable int id){
         String message;
 
-        if (rs.deleteRecipe(id) == null){
+        if (rs.deleteRecipe(id).equals("Unable to delete that recipe!")){
             message = "Unable to delete that recipe!";
         } else {
-             message = rs.deleteRecipe(id); //TODO: I RETURN A MESSAGE!
+             message = String.valueOf(rs.deleteRecipe(id)); //TODO: I RETURN A MESSAGE!
         }
         return ResponseEntity.ok(message);
     }

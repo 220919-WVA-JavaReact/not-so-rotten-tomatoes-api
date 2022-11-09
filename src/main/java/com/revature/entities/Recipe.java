@@ -22,6 +22,11 @@ public class Recipe {
     @Enumerated(EnumType.STRING)
     private Category category;
 
+//    //TODO: TESTING HERE, CHANGED ENTITY RELATIONSHIP.
+//    @OneToMany(cascade = { CascadeType.REMOVE, CascadeType.PERSIST })
+//    @JoinColumn(name = "reviews", referencedColumnName = "review_id")
+//    private Review review;
+
     public Recipe(){}
     public Recipe(int recipe_id, User author, String recipe_name, String instructions, Category category) {
         this.recipe_id = recipe_id;
@@ -29,6 +34,7 @@ public class Recipe {
         this.recipe_name = recipe_name;
         this.instructions = instructions;
         this.category = category;
+       //this.review = review;
     }
 
     public Recipe(Optional<Recipe> updated) {
@@ -74,6 +80,10 @@ public class Recipe {
     public void setCategory(Category category) {
         this.category = category;
     }
+
+//    public Review getReview() { return review; }
+//
+//    public void setReview(Review revies) { this.review = review; }
 
 
     @Override

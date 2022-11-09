@@ -16,7 +16,8 @@ public class Review {
     private User author;
     @Column(nullable = false)
     private String review_text;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "recipe_id", referencedColumnName = "recipe_id")
     private Recipe recipe_id;
 

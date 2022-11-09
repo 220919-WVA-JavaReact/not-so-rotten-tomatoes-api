@@ -2,6 +2,9 @@ package com.revature.repositories;
 
 import com.revature.entities.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -18,5 +21,9 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 // @DOCS: I AM DEPRECATED, BECAUSE DELETE NOW USES FINDBYID, WHICH EXPECTS AN OPTIONAL
     //RATHER THAN A RECIPE LITERAL.
 
-    void delete(Optional<Recipe> deletedRecipe);
+//    @Modifying(clearAutomatically = true, flushAutomatically = true)
+//    @Query(value = "delete from recipes where recipes.recipe_id = 2 cascade", nativeQuery = true)
+    //native deprecated, i dont want to write own SQL.
+    void deleteById(int id); //@Param("id")
+    //@DOCS: clear auto, because we need persistence context to update, and flush auto, in case we have uncommited changes.
 }

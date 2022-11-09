@@ -64,7 +64,7 @@ public class RecipeService {
             } else {
                 deletedRecipe = rr.findById(id);
                 //findById will throw IllegalArgumentException, however. Testing...
-                rr.delete(deletedRecipe);
+                rr.deleteById(id); //CHANGED HERE, BUILDING.
                 message = "Successfully deleted!"; //TODO: TEST I WORK !
             }
 
