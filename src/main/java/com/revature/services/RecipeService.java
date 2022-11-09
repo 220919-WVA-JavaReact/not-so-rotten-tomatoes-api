@@ -3,12 +3,11 @@ package com.revature.services;
 import com.revature.entities.Category;
 import com.revature.entities.Recipe;
 import com.revature.entities.User;
+import com.revature.exceptions.UserNotFoundException;
 import com.revature.repositories.UserRepository;
-import com.revature.repositories.exceptions.RecipeNotFoundException;
 import com.revature.repositories.RecipeRepository;
-import com.revature.repositories.exceptions.UserNotFoundException;
+import com.revature.exceptions.RecipeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,6 +29,7 @@ public class RecipeService {
     public List<Recipe> getAllRecipes() {
         return rr.findAll();
     }
+
     public Recipe createRecipe(Recipe recipe) {
         return rr.save(recipe);
     }
@@ -37,6 +37,7 @@ public class RecipeService {
     public Optional<Recipe> getRecipeById(int id) {
         return rr.findById(id);
     }
+
     public Recipe updateRecipe(int id, Recipe update) throws RecipeNotFoundException{
 
         //extract new values out of update
@@ -72,7 +73,4 @@ public class RecipeService {
         List<Recipe> res = rr.findByRecipeContains(searchTerm.toLowerCase());
         return res;
     }
-
-
-
 }

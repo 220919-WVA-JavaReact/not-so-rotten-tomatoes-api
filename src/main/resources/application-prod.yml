@@ -1,9 +1,11 @@
 spring:
-  datasource:
-    url: ${DB_URL}
-    username: ${DB_USER}
-    password: ${DB_PASS}
+  datasource: #delete these when adding to Elastic Beanstalk
+    url: ${DB_URL} #delete these when adding to Elastic Beanstalk
+    username: ${DB_USER} #delete these when adding to Elastic Beanstalk
+    password: ${DB_PASS} #delete these when adding to Elastic Beanstalk
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: create #Specifies hwo Hibernate should act w database.
+      ddl-auto: validate #Specifies hwo Hibernate should act w database.
+#server:
+#  port: 5000 # activate this when changing to Beanstalk so port is open to 5000 instead of 8080

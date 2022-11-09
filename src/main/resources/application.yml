@@ -19,7 +19,6 @@ management:
       exposure:
         include:
           - "*"
-
 server:
   error:
     include-stacktrace: never
