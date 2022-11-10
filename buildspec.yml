@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+  build:
+    commands:
+      - echo "build phase started"
+      - mvn clean package -Pprod
+  post_build:
+    commands:
+      - echo "build phase completed. Moving artifact to root level"
+      - mv target/*.jar ./nsrt.jar
+
+artifacts:
+  files:
+    - nsrt.jar

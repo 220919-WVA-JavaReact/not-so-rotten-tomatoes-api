@@ -28,10 +28,17 @@ public class AuthController {
     }
     @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<UserDTO> authenticate(@RequestBody LoginDTO login) {
+        //Use login information to create a UserDTO with AuthService functionality
         UserDTO user = as.authenticate(login);
+        //take User information and generate a token from TokenService functionality
         String token = ts.generateToken(user);
+        //call for a new header to add the token
         HttpHeaders headers = new HttpHeaders();
+
+        //set the header with the token info and title
         headers.set("Authorization", token);
+
+        //return the user info and headers.
         return new ResponseEntity<>(user, headers, HttpStatus.OK);
     }
 

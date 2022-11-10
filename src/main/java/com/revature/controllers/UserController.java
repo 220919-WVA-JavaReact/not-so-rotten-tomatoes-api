@@ -22,22 +22,6 @@ public class UserController {
         this.us = us;
     }
 
-    //RequestParam is used for retrieving query params
-    @Secured(rolesAllowed = "ADMIN")
-    @GetMapping
-    public ResponseEntity<List<UserDTO>> getUsers(@RequestParam(name="role", required = false) Role role){
-        List<UserDTO> users = null;
-        //If no request parms, return all users
-        if (role == null) {
-             users = us.getAllUsers();
-            return new ResponseEntity<>(users, HttpStatus.OK);
-        } else {
-            users = us.getUsersByRole(role);
-            return new ResponseEntity<>(users, HttpStatus.OK);
-        }
-
-
-    }
 
     //PathVariable is used for mapping to variable given in map request
     @GetMapping("/{id}")

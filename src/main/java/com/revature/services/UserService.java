@@ -22,22 +22,10 @@ public class UserService {
     }
 
 
-    public List<UserDTO> getAllUsers(){
-        List<User> users = ur.findAll();
-        List<UserDTO> userDTO = users.stream().map(user -> new UserDTO(user)).collect(Collectors.toList());
-        return userDTO;
-    }
-
     public UserDTO getUserById(int id) throws UserNotFoundException {
         User user = ur.findById(id).orElseThrow(() -> new UserNotFoundException());
         UserDTO userDTO = new UserDTO(user);
 
-        return userDTO;
-    }
-
-    public List<UserDTO> getUsersByRole(Role role) {
-        List<User> users = ur.findUsersByRole(role);
-        List<UserDTO> userDTO = users.stream().map(user -> new UserDTO(user)).collect(Collectors.toList());
         return userDTO;
     }
 
