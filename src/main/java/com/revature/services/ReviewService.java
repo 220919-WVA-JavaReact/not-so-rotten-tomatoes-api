@@ -32,47 +32,59 @@ public class ReviewService {
 
 
     public List<Review> getAllReviews(){
+        //Use JPA to find all reviews that are in the database.
         List<Review> reviews = rr.findAll();
 
+        //return all reviews.
         return reviews;
     }
 
     public List<Review> getReviewsByAuthor(int id) {
+        //Use JPA to find a user by the unique id or else throw exception
         User u = ur.findById(id).orElseThrow(UserNotFoundException::new);
+        //Utilize user id to find all the reviews and format into list.
         List<Review> reviews = rr.findByAuthor(u);
 
+        //return list of reviews by author
         return reviews;
     }
 
     public List<Review> getReviewsByRecipe(int id) {
+        //Use JPA to find a recipe by the unique id or else throw exception
         Recipe r = reciperepo.findById(id).orElseThrow(RecipeNotFoundException::new);
+        //Utilize recipe id to find all the reviews and format into list.
         List<Review> reviews = rr.findByRecipeid(r);
 
+        //return list of reviews by recipe id
         return reviews;
     }
 
 
     public Review createReview(Review review) {
-        //Check if user is logged in? grab user ID?
+        //persist info to database by creating a new review
         rr.save(review);
+
+        //return the review information
         return review;
     }
 
-    //Utilized by ID below
-//    public Review deleteReview(Review review) {
-//        //Check if user is logged in? grab user ID? Mock validate?
-//        rr.delete(review);
-//        return review;
-//    }
 
     public Review deleteReviewById(int id){
+        //Use JPA to find a review by the unique id or else throw exception
         Review review = rr.findById(id).orElseThrow(() -> new ReviewNotFoundException());
+
+        //delete the review found in the database.
         rr.delete(review);
+
+        //return deleted review information
         return review;
     }
 
     public Review getReviewById(int id) {
+        //Use JPA to find a review by the unique id or else throw exception
         Review review = rr.findById(id).orElseThrow(() -> new ReviewNotFoundException());
+
+        //return found review
         return review;
     }
 }

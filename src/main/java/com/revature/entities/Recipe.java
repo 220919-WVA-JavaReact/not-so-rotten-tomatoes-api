@@ -17,7 +17,7 @@ public class Recipe {
     private User author;
     @Column(nullable = false)
     private String recipe_name;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition="TEXT")
     private String instructions;
     @Enumerated(EnumType.STRING)
     private Category category;
