@@ -24,7 +24,6 @@ public class AuthService {
         //check if username matches what's found in database as well as password.
         if (login.getUsername() != user.getUsername() && login.getPassword() != user.getPassword()) {
             //throw a LoginException
-            throw new LoginException();
         }
         //return the userinfo without password (UserDTO)
         return new UserDTO(user);
