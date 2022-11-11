@@ -41,7 +41,7 @@ public class RecipeService {
     public Recipe updateRecipe(int id, Recipe update) throws RecipeNotFoundException{
 
         //extract new values out of update
-        int authorint = update.getAuthor().getUser_id();
+       // int authorint = update.getAuthor().getUser_id();
         String newTitle = update.getRecipe_name();
         String newInstructions = update.getInstructions();
         Category newCategory = update.getCategory();
