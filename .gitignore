@@ -60,4 +60,3 @@ buildNumber.properties
 logback.xml
 LOG_FILE_IS_UNDEFINED
 LOG_FILE_IS_UNDEFINED.2022-11-03.0.gz
-.env
