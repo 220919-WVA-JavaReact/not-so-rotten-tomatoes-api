@@ -1,6 +1,7 @@
 package com.revature.services;
 
 
+import com.revature.dtos.ReviewDTO;
 import com.revature.entities.Recipe;
 import com.revature.entities.Review;
 import com.revature.entities.User;
@@ -60,12 +61,19 @@ public class ReviewService {
     }
 
 
-    public Review createReview(Review review) {
+    public Review createReview(ReviewDTO review) {
+        //retrieve author by finding on the ID to keep password and email abstracted
+        User u = rr.findById(review.getAuthorid()).orElseThrow(UserNotFoundException::new).getAuthor();
+        //set author to what was found
+        Review newReview = new Review();
+        newReview.setAuthor(u);
+        newReview.setReview_text(review.getReview_text());
+        newReview.setRecipe_id(review.getRecipe_id());
         //persist info to database by creating a new review
-        rr.save(review);
+        rr.save(newReview);
 
         //return the review information
-        return review;
+        return newReview;
     }
 
 

@@ -6,6 +6,6 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: validate #Specifies hwo Hibernate should act w database.
+      ddl-auto: create #Specifies hwo Hibernate should act w database.
 #server:
 #  port: 5000 # activate this when changing to Beanstalk so port is open to 5000 instead of 8080
