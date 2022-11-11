@@ -2,6 +2,7 @@ package com.revature.controllers;
 
 
 import com.revature.annotations.Secured;
+import com.revature.dtos.ReviewDTO;
 import com.revature.entities.Review;
 import com.revature.services.ReviewService;
 import com.revature.services.UserService;
@@ -63,12 +64,12 @@ public class ReviewController {
 
     @Secured(rolesAllowed = {"ADMIN", "MODERATOR", "USER"})
     @PostMapping("/recipe/{id}")
-    public ResponseEntity<Review> createReview(@RequestBody Review review){
+    public ResponseEntity<Review> createReview(@RequestBody ReviewDTO review){
         //utilize ReviewService functionality to add a review to the database
-        review = rs.createReview(review);
+        Review newReview = rs.createReview(review);
 
         //return the added database information
-        return new ResponseEntity<>(review, HttpStatus.CREATED);
+        return new ResponseEntity<>(newReview, HttpStatus.CREATED);
     }
 
     @Secured(rolesAllowed = {"ADMIN", "MODERATOR"})

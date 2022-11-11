@@ -1,5 +1,7 @@
 package com.revature.entities;
 
+import com.revature.dtos.UserDTO;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -11,7 +13,7 @@ public class Review {
     @Column(nullable = false)
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int review_id;
-    @ManyToOne
+    @ManyToOne(targetEntity = User.class, cascade=CascadeType.ALL)
     @JoinColumn(name = "author", referencedColumnName = "user_id")
     private User author;
     @Column(nullable = false)
