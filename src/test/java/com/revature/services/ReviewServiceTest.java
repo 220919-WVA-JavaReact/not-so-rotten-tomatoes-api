@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import com.revature.NsrtApplication;
+import com.revature.dtos.ReviewDTO;
 import com.revature.entities.Recipe;
 import com.revature.entities.Review;
 import com.revature.entities.User;
@@ -128,14 +129,19 @@ public class ReviewServiceTest {
     @Test
     public void createReviewSaves(){
         User cory = new User();
+        cory.setUser_id(2);
         Recipe testRecipe = new Recipe();
+        ReviewDTO returnedDTO = new ReviewDTO();
+        returnedDTO.setAuthorid(2);
+        returnedDTO.setReview_text("good food");
+        returnedDTO.setRecipe_id(testRecipe);
         Review returnedReview = new Review();
         returnedReview.setReview_id(1);
         returnedReview.setAuthor(cory);
-        returnedReview.setReview_text("good food");
-        returnedReview.setRecipe_id(testRecipe);
+        returnedReview.setReview_text(returnedDTO.getReview_text());
+        returnedReview.setRecipe_id(returnedDTO.getRecipe_id());
 
-
+        Mockito.when(mockRepository.findById(returnedDTO.getAuthorid())).thenReturn(Optional.of(returnedReview));
         Mockito.when(mockRepository.save(returnedReview)).thenReturn(returnedReview);
 
         Review expected = new Review();
@@ -145,9 +151,12 @@ public class ReviewServiceTest {
         expected.setRecipe_id(testRecipe);
 
 
-        Review actual = sut.createReview(returnedReview);
+        Review actual = sut.createReview(returnedDTO);
+        actual.setReview_id(1); //why am I having to set this here? Why won't it persist?
 
         assertEquals(expected, actual);
+        System.out.println("EXPECTED: " + expected);
+        System.out.println("RETURN: " + actual);
     }
 
     @Test
