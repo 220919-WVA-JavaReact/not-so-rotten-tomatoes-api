@@ -21,7 +21,7 @@ public class RecipeController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Recipe> updateRecipe(@PathVariable int id, @RequestBody Recipe update){
-
+        //@DOCS: YOU MUST PASS IN "ID" TO THE ANNOTATION ABOVE.
         ResponseEntity res = null;
         try {
             Recipe re = rs.updateRecipe(id, update); //if re is null, error, else, proceed.
