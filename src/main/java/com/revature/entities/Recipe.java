@@ -3,7 +3,6 @@ package com.revature.entities;
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 @Entity
 @Table(name="recipes")
