@@ -41,6 +41,7 @@ public class RecipeService {
     public Recipe updateRecipe(int id, Recipe update) throws RecipeNotFoundException{
 
         //extract new values out of update
+       // int authorint = update.getAuthor().getUser_id();
         String newTitle = update.getRecipe_name();
         String newInstructions = update.getInstructions();
         Category newCategory = update.getCategory();
@@ -52,6 +53,7 @@ public class RecipeService {
             //that no recipe exists with that id.
 
              //set new infos, save to db
+            //newRecipe.setAuthor(authorint);
             newRecipe.setRecipe_name(newTitle);
             newRecipe.setInstructions(newInstructions);
             newRecipe.setCategory(newCategory);
