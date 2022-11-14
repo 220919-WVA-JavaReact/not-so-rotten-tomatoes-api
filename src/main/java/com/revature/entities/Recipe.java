@@ -34,6 +34,13 @@ public class Recipe {
        // this.instructions = String.valueOf(updated);
     }
 
+    public Recipe(User u, String instructions, String title, Category category) {
+        this.author = u;
+        this.instructions = instructions;
+        this.recipe_name = title;
+        this.category = category;
+    }
+
     public int getRecipe_id() {
         return recipe_id;
     }

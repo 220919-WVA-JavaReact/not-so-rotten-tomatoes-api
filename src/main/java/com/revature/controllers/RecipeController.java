@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 
+import com.revature.dtos.RecipeDTO;
 import com.revature.entities.Recipe;
 import com.revature.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,18 +49,18 @@ public class RecipeController {
 
     @GetMapping(value="/{id}", produces="application/json")
     @ResponseBody
-    public ResponseEntity<Optional<Recipe>> getRecipeById(@PathVariable("id") int id) {
+    public ResponseEntity<Recipe> getRecipeById(@PathVariable("id") int id) {
         return new ResponseEntity<>(rs.getRecipeById(id), HttpStatus.OK);
     }
 
     @GetMapping(value="/users/{id}", produces="application/json")
     @ResponseBody
-    public ResponseEntity<List<Recipe>> getRecipeByAuthorId(@PathVariable("id") int id) {
-        return new ResponseEntity<>(rs.getRecipeByAuthorId(id), HttpStatus.OK);
+    public ResponseEntity<List<Recipe>> getRecipesByAuthorId(@PathVariable("id") int id) {
+        return new ResponseEntity<>(rs.getRecipesByAuthorId(id), HttpStatus.OK);
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Recipe> createUser(@RequestBody Recipe recipe) {
+    public ResponseEntity<Recipe> createRecipe(@RequestBody RecipeDTO recipe) {
         return new ResponseEntity<>(rs.createRecipe(recipe), HttpStatus.CREATED);
     }
 
