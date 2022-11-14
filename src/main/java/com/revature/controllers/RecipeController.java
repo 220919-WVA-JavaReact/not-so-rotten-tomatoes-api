@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 
+import com.revature.dtos.RecipeDTO;
 import com.revature.entities.Recipe;
 import com.revature.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +60,7 @@ public class RecipeController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Recipe> createUser(@RequestBody Recipe recipe) {
+    public ResponseEntity<Recipe> createRecipe(@RequestBody RecipeDTO recipe) {
         return new ResponseEntity<>(rs.createRecipe(recipe), HttpStatus.CREATED);
     }
 
