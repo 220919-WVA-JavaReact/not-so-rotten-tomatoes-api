@@ -34,8 +34,9 @@ public class RecipeService {
         return rr.save(recipe);
     }
 
-    public Optional<Recipe> getRecipeById(int id) {
-        return rr.findById(id);
+    public Recipe getRecipeById(int id) {
+        Recipe r = rr.findById(id).orElseThrow(RecipeNotFoundException::new);
+        return r;
     }
 
     public Recipe updateRecipe(int id, Recipe update) throws RecipeNotFoundException{
@@ -66,7 +67,7 @@ public class RecipeService {
 
     }
 
-    public List<Recipe> getRecipeByAuthorId(int id){
+    public List<Recipe> getRecipesByAuthorId(int id){
         User u = ur.findById(id).orElseThrow(UserNotFoundException::new);
         return rr.findRecipesByAuthor(u);
     }
