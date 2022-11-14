@@ -34,42 +34,42 @@ public class RecipeService {
 
     private AmazonS3 s3Client;
 
-    public String uploadFile(MultipartFile file) {
-        File fileObject = convertMultiPartFileToFile(file);
-        String fileName = System.currentTimeMillis()+"_"+file.getOriginalFilename();
-        s3Client.putObject(new PutObjectRequest(bucketName, fileName, fileObject));
-
-        //delete file once uploaded
-        fileObject.delete();
-
-        return "File Uploaded: " + fileName;
-    }
-
-    public byte[] downloadFile(String fileName){
-        S3Object s3Object = s3Client.getObject(bucketName, fileName);
-        S3ObjectInputStream is = s3Object.getObjectContent();
-        try {
-            byte[] content = IOUtils.toByteArray(is);
-            return content;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public String deleteFile(String fileName) {
-        s3Client.deleteObject(bucketName, fileName);
-        return fileName + " removed.";
-
-    }
-    private File convertMultiPartFileToFile(MultipartFile file) {
-        File convertedFile = new File(file.getOriginalFilename());
-        try(FileOutputStream fos = new FileOutputStream(convertedFile)) {
-            fos.write(file.getBytes());
-        } catch (IOException e) {
-            System.out.println("Error converting multipartFile to file. : " + e);
-        }
-        return convertedFile;
-    }
+//    public String uploadFile(MultipartFile file) {
+//        File fileObject = convertMultiPartFileToFile(file);
+//        String fileName = System.currentTimeMillis()+"_"+file.getOriginalFilename();
+//        s3Client.putObject(new PutObjectRequest(bucketName, fileName, fileObject));
+//
+//        //delete file once uploaded
+//        fileObject.delete();
+//
+//        return "File Uploaded: " + fileName;
+//    }
+//
+//    public byte[] downloadFile(String fileName){
+//        S3Object s3Object = s3Client.getObject(bucketName, fileName);
+//        S3ObjectInputStream is = s3Object.getObjectContent();
+//        try {
+//            byte[] content = IOUtils.toByteArray(is);
+//            return content;
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//    public String deleteFile(String fileName) {
+//        s3Client.deleteObject(bucketName, fileName);
+//        return fileName + " removed.";
+//
+//    }
+//    private File convertMultiPartFileToFile(MultipartFile file) {
+//        File convertedFile = new File(file.getOriginalFilename());
+//        try(FileOutputStream fos = new FileOutputStream(convertedFile)) {
+//            fos.write(file.getBytes());
+//        } catch (IOException e) {
+//            System.out.println("Error converting multipartFile to file. : " + e);
+//        }
+//        return convertedFile;
+//    }
 
     @Autowired
     public RecipeService(RecipeRepository rr, UserRepository ur, AmazonS3 s3Client) {
