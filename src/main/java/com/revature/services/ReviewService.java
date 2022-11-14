@@ -70,7 +70,9 @@ public class ReviewService {
         newReview.setReview_text(review.getReview_text());
         newReview.setRecipe_id(review.getRecipe_id());
         //persist info to database by creating a new review
-        rr.save(newReview);
+        if (!review.getReview_text().trim().equals("")) {
+            rr.save(newReview);
+        }
 
         //return the review information
         return newReview;
