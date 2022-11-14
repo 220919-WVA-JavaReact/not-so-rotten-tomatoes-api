@@ -85,7 +85,8 @@ public class RecipeService {
 
     public Recipe createRecipe(RecipeDTO recipe) {
 
-        User u = rr.findById(recipe.getUserid()).orElseThrow(UserNotFoundException::new).getAuthor();
+        User u = ur.findById(recipe.getUserid()).orElseThrow(UserNotFoundException::new);
+
         Recipe newRecipe = new Recipe(u, recipe.getInstructions(), recipe.getTitle(), recipe.getCategory());
 
 
