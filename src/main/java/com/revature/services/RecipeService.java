@@ -3,7 +3,6 @@ package com.revature.services;
 import com.revature.dtos.RecipeDTO;
 import com.revature.entities.Category;
 import com.revature.entities.Recipe;
-import com.revature.entities.Review;
 import com.revature.entities.User;
 import com.revature.exceptions.UserNotFoundException;
 import com.revature.repositories.UserRepository;
@@ -34,7 +33,8 @@ public class RecipeService {
 
     public Recipe createRecipe(RecipeDTO recipe) {
 
-        User u = rr.findById(recipe.getUserid()).orElseThrow(UserNotFoundException::new).getAuthor();
+        User u = ur.findById(recipe.getUserid()).orElseThrow(UserNotFoundException::new);
+
         Recipe newRecipe = new Recipe(u, recipe.getInstructions(), recipe.getTitle(), recipe.getCategory());
 
 
