@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import com.revature.NsrtApplication;
+import com.revature.dtos.Credentials;
 import com.revature.dtos.UserDTO;
 import com.revature.entities.Role;
 import com.revature.entities.User;
@@ -55,6 +56,36 @@ public class UserServiceTest {
         //Act
         //Assert
         assertThrows(UserNotFoundException.class, () -> sut.getUserById(10000000));
+    }
+
+    @Test
+    public void createUserTest(){
+        Credentials login = new Credentials();
+        login.setUsername("jimbob234");
+        login.setPassword("1234");
+        login.setEmail("jimmyb@gmail.com");
+        User newUser = new User();
+        newUser.setUsername(login.getUsername());
+        newUser.setPassword(login.getPassword());
+        newUser.setEmail(login.getEmail());
+        newUser.setUser_id(123);
+        newUser.setRole(Role.USER);
+        UserDTO newDTOUser = new UserDTO(newUser);
+
+
+
+        Mockito.when(mockRepository.findUserByUsername("jimbob234")).thenReturn(newUser);
+
+        UserDTO expected = new UserDTO();
+        expected.setId(123);
+        expected.setUsername("jimbob234");
+        expected.setRole(Role.USER);
+
+        UserDTO actual = sut.createUser(login);
+
+
+        assertEquals(expected, actual);
+
     }
 
 }
