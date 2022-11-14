@@ -75,5 +75,16 @@ public class RecipeServiceTest {
         Recipe actual = rr.save(recipe);
         assertEquals(recipe, actual);
     }
+    @Test
+    public void updateRecipeReturnsNewRecipe(){
+        //when you supply the wrong id, throws recipe not found exception.
+        User user = new User("jdaniels","j@jmoney.net","password");
+        Recipe ogRecipe = new Recipe(1, user, "Goulash","Figure out how to make it", Category.Dessert);
+        String newTitle = update.getRecipe_name();
+        String newInstructions = update.getInstructions();
+        Category newCategory = update.getCategory();
 
+
+        Mockito.when(rs.updateRecipe(10000, update)).thenReturn(Optional.empty());
+    }
 }
