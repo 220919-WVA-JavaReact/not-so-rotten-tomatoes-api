@@ -32,7 +32,7 @@ public class RecipeService {
     RecipeRepository rr;
     UserRepository ur;
 
-    @Value("${bucketName}")
+    @Value("${amazonProperties.bucketName}")
     private String bucketName;
 
     private AmazonS3 s3Client;
@@ -83,10 +83,10 @@ public class RecipeService {
         if (file != null && !file.isEmpty()) {
             String fileName = uploadFile(file);
 
-            Recipe newRecipe = new Recipe(u, recipe.getInstructions(), recipe.getTitle(), recipe.getCategory(), fileName);
+            Recipe newRecipe = new Recipe(u, recipe.getTitle(), recipe.getInstructions(), recipe.getCategory(), fileName);
             return rr.save(newRecipe);
         } else {
-            Recipe newRecipe = new Recipe(u, recipe.getInstructions(), recipe.getTitle(), recipe.getCategory());
+            Recipe newRecipe = new Recipe(u, recipe.getTitle(), recipe.getInstructions(), recipe.getCategory());
             newRecipe.setFilename("noimage.jpg");
             return rr.save(newRecipe);
         }

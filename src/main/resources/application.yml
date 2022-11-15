@@ -22,3 +22,8 @@ management:
 server:
   error:
     include-stacktrace: never
+
+amazonProperties:
+  accessKey: ${ACCESS_KEY}
+  secretKey: ${SECRET_KEY}
+  bucketName: ${BUCKET_NAME}
