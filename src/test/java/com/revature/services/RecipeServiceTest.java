@@ -77,7 +77,7 @@ public class RecipeServiceTest {
     }
     @Test
     public void updateRecipeReturnsNewRecipe(){
-        //when you supply the wrong id, throws recipe not found exception.
+        //when called, returns updated recipe
         User user = new User("jdaniels","j@jmoney.net","password");
         Recipe ogRecipe = new Recipe(1, user, "Goulash","Figure out how to make it", Category.Dessert);
         Recipe update = new Recipe();
