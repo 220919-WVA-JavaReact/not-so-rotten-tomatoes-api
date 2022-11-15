@@ -80,11 +80,15 @@ public class RecipeServiceTest {
         //when you supply the wrong id, throws recipe not found exception.
         User user = new User("jdaniels","j@jmoney.net","password");
         Recipe ogRecipe = new Recipe(1, user, "Goulash","Figure out how to make it", Category.Dessert);
-        String newTitle = update.getRecipe_name();
-        String newInstructions = update.getInstructions();
-        Category newCategory = update.getCategory();
+        Recipe update = new Recipe();
 
 
-        Mockito.when(rs.updateRecipe(10000, update)).thenReturn(Optional.empty());
+
+        update.setRecipe_name("Goulash 2");
+        update.setCategory(Category.Dessert);
+        update.setInstructions("Just do it");
+
+        Mockito.when(rs.updateRecipe(1, update)).thenReturn(update);
+        assertEquals(update, ogRecipe);
     }
 }
