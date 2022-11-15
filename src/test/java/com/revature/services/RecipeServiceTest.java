@@ -76,4 +76,22 @@ public class RecipeServiceTest {
         assertEquals(recipe, actual);
     }
 
+    @Test
+    public void findByRecipeWorks() {
+        String searchTerm = "food";
+        Recipe burrito = new Recipe();
+        burrito.setRecipe_id(1);
+        burrito.setRecipe_name("food");
+        List<Recipe> recipes= new ArrayList<>();
+        recipes.add(burrito);
+        Mockito.when(rr.findByRecipeContains(searchTerm)).thenReturn(recipes);
+
+        List<Recipe> expected = new ArrayList<>();
+        expected.add(burrito);
+
+        List<Recipe> actual = rs.findByRecipeContains(searchTerm);
+
+        assertEquals(expected, actual);
+    }
+
 }

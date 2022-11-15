@@ -1,5 +1,11 @@
 package com.revature.services;
 
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.S3ClientOptions;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectInputStream;
+import com.amazonaws.util.IOUtils;
 import com.revature.dtos.RecipeDTO;
 import com.revature.entities.Category;
 import com.revature.entities.Recipe;
@@ -9,10 +15,16 @@ import com.revature.repositories.UserRepository;
 import com.revature.repositories.RecipeRepository;
 import com.revature.exceptions.RecipeNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 @Service
 public class RecipeService {
@@ -20,25 +32,65 @@ public class RecipeService {
     RecipeRepository rr;
     UserRepository ur;
 
+    @Value("${amazonProperties.bucketName}")
+    private String bucketName;
+
+    private AmazonS3 s3Client;
+
+    public String uploadFile(MultipartFile file) {
+        File fileObject = convertMultiPartFileToFile(file);
+        String fileName = System.currentTimeMillis()+"_"+file.getOriginalFilename();
+        s3Client.putObject(new PutObjectRequest(bucketName, fileName, fileObject));
+
+        //delete file once uploaded
+        fileObject.delete();
+
+        return fileName;
+    }
+//    public void uploadFile(String fileName, InputStream inputStream) {
+//        try {
+//            s3Client.putObject(new PutObjectRequest(bucketName, fileName, inputStream.available()));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+
+    private File convertMultiPartFileToFile(MultipartFile file) {
+        File convertedFile = new File(Objects.requireNonNull(file.getOriginalFilename()));
+        try(FileOutputStream fos = new FileOutputStream(convertedFile)) {
+            fos.write(file.getBytes());
+        } catch (IOException e) {
+            System.out.println("Error converting multipartFile to file. : " + e);
+        }
+        return convertedFile;
+    }
+
     @Autowired
-    public RecipeService(RecipeRepository rr, UserRepository ur) {
+    public RecipeService(RecipeRepository rr, UserRepository ur, AmazonS3 s3Client) {
 
         this.rr = rr;
         this.ur = ur;
+        this.s3Client = s3Client;
     }
 
     public List<Recipe> getAllRecipes() {
         return rr.findAll();
     }
 
-    public Recipe createRecipe(RecipeDTO recipe) {
+    public Recipe createRecipe(RecipeDTO recipe, MultipartFile file) {
 
         User u = ur.findById(recipe.getUserid()).orElseThrow(UserNotFoundException::new);
+        if (file != null && !file.isEmpty()) {
+            String fileName = uploadFile(file);
 
-        Recipe newRecipe = new Recipe(u, recipe.getInstructions(), recipe.getTitle(), recipe.getCategory());
+            Recipe newRecipe = new Recipe(u, recipe.getTitle(), recipe.getInstructions(), recipe.getCategory(), fileName);
+            return rr.save(newRecipe);
+        } else {
+            Recipe newRecipe = new Recipe(u, recipe.getTitle(), recipe.getInstructions(), recipe.getCategory());
+            newRecipe.setFilename("noimage.jpg");
+            return rr.save(newRecipe);
+        }
 
-
-        return rr.save(newRecipe);
     }
 
     public Recipe getRecipeById(int id) {
