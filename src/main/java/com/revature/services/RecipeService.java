@@ -1,6 +1,7 @@
 package com.revature.services;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.S3ClientOptions;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
@@ -21,7 +22,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class RecipeService {
@@ -34,42 +37,33 @@ public class RecipeService {
 
     private AmazonS3 s3Client;
 
-//    public String uploadFile(MultipartFile file) {
-//        File fileObject = convertMultiPartFileToFile(file);
-//        String fileName = System.currentTimeMillis()+"_"+file.getOriginalFilename();
-//        s3Client.putObject(new PutObjectRequest(bucketName, fileName, fileObject));
-//
-//        //delete file once uploaded
-//        fileObject.delete();
-//
-//        return "File Uploaded: " + fileName;
-//    }
-//
-//    public byte[] downloadFile(String fileName){
-//        S3Object s3Object = s3Client.getObject(bucketName, fileName);
-//        S3ObjectInputStream is = s3Object.getObjectContent();
+    public String uploadFile(MultipartFile file) {
+        File fileObject = convertMultiPartFileToFile(file);
+        String fileName = System.currentTimeMillis()+"_"+file.getOriginalFilename();
+        s3Client.putObject(new PutObjectRequest(bucketName, fileName, fileObject));
+
+        //delete file once uploaded
+        fileObject.delete();
+
+        return fileName;
+    }
+//    public void uploadFile(String fileName, InputStream inputStream) {
 //        try {
-//            byte[] content = IOUtils.toByteArray(is);
-//            return content;
+//            s3Client.putObject(new PutObjectRequest(bucketName, fileName, inputStream.available()));
 //        } catch (IOException e) {
 //            throw new RuntimeException(e);
 //        }
 //    }
-//
-//    public String deleteFile(String fileName) {
-//        s3Client.deleteObject(bucketName, fileName);
-//        return fileName + " removed.";
-//
-//    }
-//    private File convertMultiPartFileToFile(MultipartFile file) {
-//        File convertedFile = new File(file.getOriginalFilename());
-//        try(FileOutputStream fos = new FileOutputStream(convertedFile)) {
-//            fos.write(file.getBytes());
-//        } catch (IOException e) {
-//            System.out.println("Error converting multipartFile to file. : " + e);
-//        }
-//        return convertedFile;
-//    }
+
+    private File convertMultiPartFileToFile(MultipartFile file) {
+        File convertedFile = new File(Objects.requireNonNull(file.getOriginalFilename()));
+        try(FileOutputStream fos = new FileOutputStream(convertedFile)) {
+            fos.write(file.getBytes());
+        } catch (IOException e) {
+            System.out.println("Error converting multipartFile to file. : " + e);
+        }
+        return convertedFile;
+    }
 
     @Autowired
     public RecipeService(RecipeRepository rr, UserRepository ur, AmazonS3 s3Client) {
@@ -83,14 +77,20 @@ public class RecipeService {
         return rr.findAll();
     }
 
-    public Recipe createRecipe(RecipeDTO recipe) {
+    public Recipe createRecipe(RecipeDTO recipe, MultipartFile file) {
 
         User u = ur.findById(recipe.getUserid()).orElseThrow(UserNotFoundException::new);
+        if (file != null && !file.isEmpty()) {
+            String fileName = uploadFile(file);
 
-        Recipe newRecipe = new Recipe(u, recipe.getInstructions(), recipe.getTitle(), recipe.getCategory());
+            Recipe newRecipe = new Recipe(u, recipe.getInstructions(), recipe.getTitle(), recipe.getCategory(), fileName);
+            return rr.save(newRecipe);
+        } else {
+            Recipe newRecipe = new Recipe(u, recipe.getInstructions(), recipe.getTitle(), recipe.getCategory());
+            newRecipe.setFilename("noimage.jpg");
+            return rr.save(newRecipe);
+        }
 
-
-        return rr.save(newRecipe);
     }
 
     public Recipe getRecipeById(int id) {

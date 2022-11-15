@@ -20,6 +20,8 @@ public class Recipe {
     private String instructions;
     @Enumerated(EnumType.STRING)
     private Category category;
+    @Column(columnDefinition = " varchar(255) default 'noimage.jpg'")
+    private String filename;
 
     public Recipe(){}
     public Recipe(int recipe_id, User author, String recipe_name, String instructions, Category category) {
@@ -28,6 +30,15 @@ public class Recipe {
         this.recipe_name = recipe_name;
         this.instructions = instructions;
         this.category = category;
+    }
+
+    public Recipe(User author, String recipe_name, String instructions, Category category, String filename) {
+        this.recipe_id = recipe_id;
+        this.author = author;
+        this.recipe_name = recipe_name;
+        this.instructions = instructions;
+        this.category = category;
+        this.filename = filename;
     }
 
     public Recipe(Optional<Recipe> updated) {
@@ -81,18 +92,25 @@ public class Recipe {
         this.category = category;
     }
 
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Recipe recipe = (Recipe) o;
-        return recipe_id == recipe.recipe_id && Objects.equals(author, recipe.author) && Objects.equals(recipe_name, recipe.recipe_name) && Objects.equals(instructions, recipe.instructions) && category == recipe.category;
+        return recipe_id == recipe.recipe_id && Objects.equals(author, recipe.author) && Objects.equals(recipe_name, recipe.recipe_name) && Objects.equals(instructions, recipe.instructions) && category == recipe.category && Objects.equals(filename, recipe.filename);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(recipe_id, author, recipe_name, instructions, category);
+        return Objects.hash(recipe_id, author, recipe_name, instructions, category, filename);
     }
 
     @Override
@@ -103,6 +121,7 @@ public class Recipe {
                 ", recipe_name='" + recipe_name + '\'' +
                 ", instructions='" + instructions + '\'' +
                 ", category=" + category +
+                ", filename='" + filename + '\'' +
                 '}';
     }
 }

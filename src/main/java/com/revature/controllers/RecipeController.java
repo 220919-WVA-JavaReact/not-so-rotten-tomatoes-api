@@ -1,6 +1,8 @@
 package com.revature.controllers;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.dtos.RecipeDTO;
 import com.revature.entities.Recipe;
 import com.revature.services.RecipeService;
@@ -9,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -59,9 +62,11 @@ public class RecipeController {
         return new ResponseEntity<>(rs.getRecipesByAuthorId(id), HttpStatus.OK);
     }
 
-    @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Recipe> createRecipe(@RequestBody RecipeDTO recipe) {
-        return new ResponseEntity<>(rs.createRecipe(recipe), HttpStatus.CREATED);
+    @PostMapping(consumes = "multipart/form-data", produces = "application/json")
+    public ResponseEntity<Recipe> createRecipe(@RequestParam String recipe, @RequestParam MultipartFile file) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        RecipeDTO recipeobj = mapper.readValue(recipe, RecipeDTO.class);
+        return new ResponseEntity<>(rs.createRecipe(recipeobj, file), HttpStatus.CREATED);
     }
 
     @GetMapping(value="/search/{searchTerm}", produces="application/json")

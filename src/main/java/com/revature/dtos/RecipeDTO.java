@@ -13,6 +13,7 @@ public class RecipeDTO {
     private String title;
     private Category category;
 
+
     public RecipeDTO() {
     }
 
