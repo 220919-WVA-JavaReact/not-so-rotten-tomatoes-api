@@ -63,12 +63,14 @@ public class ReviewService {
 
     public Review createReview(ReviewDTO review) {
         //retrieve author by finding on the ID to keep password and email abstracted
-        User u = rr.findById(review.getAuthorid()).orElseThrow(UserNotFoundException::new).getAuthor();
+        User u = ur.findById(review.getAuthorid()).orElseThrow(UserNotFoundException::new);
+//        System.out.println("USER : " + u);
         //set author to what was found
         Review newReview = new Review();
         newReview.setAuthor(u);
         newReview.setReview_text(review.getReview_text());
         newReview.setRecipe_id(review.getRecipe_id());
+//        System.out.println("ADDING TO REVIEW: " + newReview.getAuthor());
         //persist info to database by creating a new review
         if (!review.getReview_text().trim().equals("")) {
             rr.save(newReview);
