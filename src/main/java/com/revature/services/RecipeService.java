@@ -38,28 +38,29 @@ public class RecipeService {
     private AmazonS3 s3Client;
 
     public String uploadFile(MultipartFile file) {
+        //convert the file and save as a multipart file
         File fileObject = convertMultiPartFileToFile(file);
+        //create a string of the current time and file name to utilize later saving to database
         String fileName = System.currentTimeMillis()+"_"+file.getOriginalFilename();
+
+        //put the object into s3 bucket via bucket name, file name, and file object
         s3Client.putObject(new PutObjectRequest(bucketName, fileName, fileObject));
 
         //delete file once uploaded
         fileObject.delete();
 
+        //return the filename
         return fileName;
     }
-//    public void uploadFile(String fileName, InputStream inputStream) {
-//        try {
-//            s3Client.putObject(new PutObjectRequest(bucketName, fileName, inputStream.available()));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 
     private File convertMultiPartFileToFile(MultipartFile file) {
+        //save converted file as the file with the original name
         File convertedFile = new File(Objects.requireNonNull(file.getOriginalFilename()));
         try(FileOutputStream fos = new FileOutputStream(convertedFile)) {
+            //write the file output as bytes
             fos.write(file.getBytes());
         } catch (IOException e) {
+            //error if unable to convert
             System.out.println("Error converting multipartFile to file. : " + e);
         }
         return convertedFile;
@@ -80,12 +81,14 @@ public class RecipeService {
     public Recipe createRecipe(RecipeDTO recipe, MultipartFile file) {
 
         User u = ur.findById(recipe.getUserid()).orElseThrow(UserNotFoundException::new);
+        //if file is not null and not empty, upload file and save recipe
         if (file != null && !file.isEmpty()) {
             String fileName = uploadFile(file);
 
             Recipe newRecipe = new Recipe(u, recipe.getTitle(), recipe.getInstructions(), recipe.getCategory(), fileName);
             return rr.save(newRecipe);
         } else {
+            //if file is null and empty, do not upload the file and save recipe
             Recipe newRecipe = new Recipe(u, recipe.getTitle(), recipe.getInstructions(), recipe.getCategory());
             newRecipe.setFilename("noimage.jpg");
             return rr.save(newRecipe);

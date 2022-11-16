@@ -64,6 +64,7 @@ public class RecipeController {
 
     @PostMapping(consumes = "multipart/form-data", produces = "application/json")
     public ResponseEntity<Recipe> createRecipe(@RequestParam String recipe, @RequestParam(required = false) MultipartFile file) throws JsonProcessingException {
+        //intaking recipe as a string and then transferring back into an object below
         ObjectMapper mapper = new ObjectMapper();
         RecipeDTO recipeobj = mapper.readValue(recipe, RecipeDTO.class);
         return new ResponseEntity<>(rs.createRecipe(recipeobj, file), HttpStatus.CREATED);
