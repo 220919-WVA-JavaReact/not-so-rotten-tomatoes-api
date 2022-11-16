@@ -45,7 +45,7 @@ public class Recipe {
        // this.instructions = String.valueOf(updated);
     }
 
-    public Recipe(User u, String instructions, String title, Category category) {
+    public Recipe(User u,  String title, String instructions, Category category) {
         this.author = u;
         this.instructions = instructions;
         this.recipe_name = title;
