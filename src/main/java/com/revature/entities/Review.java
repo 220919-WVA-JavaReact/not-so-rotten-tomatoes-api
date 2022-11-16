@@ -1,5 +1,7 @@
 package com.revature.entities;
 
+import com.revature.dtos.UserDTO;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -11,14 +13,14 @@ public class Review {
     @Column(nullable = false)
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int review_id;
-    @ManyToOne
+    @ManyToOne(targetEntity = User.class, cascade=CascadeType.ALL)
     @JoinColumn(name = "author", referencedColumnName = "user_id")
     private User author;
     @Column(nullable = false)
     private String review_text;
     @ManyToOne
     @JoinColumn(name = "recipe_id", referencedColumnName = "recipe_id")
-    private Recipe recipe_id;
+    private Recipe recipeid;
 
     public int getReview_id() {
         return review_id;
@@ -45,11 +47,11 @@ public class Review {
     }
 
     public Recipe getRecipe_id() {
-        return recipe_id;
+        return recipeid;
     }
 
     public void setRecipe_id(Recipe recipe_id) {
-        this.recipe_id = recipe_id;
+        this.recipeid = recipe_id;
     }
 
     @Override
@@ -57,12 +59,12 @@ public class Review {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Review review = (Review) o;
-        return review_id == review.review_id && Objects.equals(author, review.author) && Objects.equals(review_text, review.review_text) && Objects.equals(recipe_id, review.recipe_id);
+        return review_id == review.review_id && Objects.equals(author, review.author) && Objects.equals(review_text, review.review_text) && Objects.equals(recipeid, review.recipeid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(review_id, author, review_text, recipe_id);
+        return Objects.hash(review_id, author, review_text, recipeid);
     }
 
     @Override
@@ -71,7 +73,7 @@ public class Review {
                 "review_id=" + review_id +
                 ", author=" + author +
                 ", review_text='" + review_text + '\'' +
-                ", recipe_id=" + recipe_id +
+                ", recipe_id=" + recipeid +
                 '}';
     }
 }
