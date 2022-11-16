@@ -4,6 +4,7 @@ import com.revature.NsrtApplication;
 import com.revature.dtos.ReviewDTO;
 import com.revature.entities.Recipe;
 import com.revature.entities.Review;
+import com.revature.entities.Role;
 import com.revature.entities.User;
 import com.revature.exceptions.ReviewNotFoundException;
 import com.revature.repositories.ReviewRepository;
@@ -147,6 +148,10 @@ public class ReviewServiceTest {
         Review expected = new Review();
         expected.setReview_id(1);
         expected.setAuthor(cory);
+        cory.setUsername("admin");
+        cory.setEmail("admin@gmail.com");
+        cory.setPassword("test");
+        cory.setRole(Role.ADMIN);
         expected.setReview_text("good food");
         expected.setRecipe_id(testRecipe);
 

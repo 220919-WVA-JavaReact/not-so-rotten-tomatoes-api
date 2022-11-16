@@ -10,7 +10,6 @@ phases:
       - mvn clean package -Pprod
   post_build:
     commands:
-      - echo "build phase completed. Moving artifact to root level"
       - mv target/*.jar ./nsrt.jar
 
 artifacts:
