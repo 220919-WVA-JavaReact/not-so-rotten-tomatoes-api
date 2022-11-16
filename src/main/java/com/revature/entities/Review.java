@@ -13,7 +13,7 @@ public class Review {
     @Column(nullable = false)
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int review_id;
-    @ManyToOne(targetEntity = User.class, cascade=CascadeType.ALL)
+    @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "author", referencedColumnName = "user_id")
     private User author;
     @Column(nullable = false)
