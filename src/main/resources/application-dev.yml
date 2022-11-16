@@ -12,3 +12,7 @@ spring:
   h2:
     console:
       enabled: true
+amazonProperties:
+  accessKey: ${ACCESS_KEY}
+  secretKey: ${SECRET_KEY}
+  bucketName: ${BUCKET_NAME}

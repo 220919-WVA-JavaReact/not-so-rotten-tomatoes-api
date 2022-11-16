@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class RecipeService {
@@ -38,28 +39,29 @@ public class RecipeService {
     private AmazonS3 s3Client;
 
     public String uploadFile(MultipartFile file) {
+        //convert the file and save as a multipart file
         File fileObject = convertMultiPartFileToFile(file);
+        //create a string of the current time and file name to utilize later saving to database
         String fileName = System.currentTimeMillis()+"_"+file.getOriginalFilename();
+
+        //put the object into s3 bucket via bucket name, file name, and file object
         s3Client.putObject(new PutObjectRequest(bucketName, fileName, fileObject));
 
         //delete file once uploaded
         fileObject.delete();
 
+        //return the filename
         return fileName;
     }
-//    public void uploadFile(String fileName, InputStream inputStream) {
-//        try {
-//            s3Client.putObject(new PutObjectRequest(bucketName, fileName, inputStream.available()));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 
     private File convertMultiPartFileToFile(MultipartFile file) {
+        //save converted file as the file with the original name
         File convertedFile = new File(Objects.requireNonNull(file.getOriginalFilename()));
         try(FileOutputStream fos = new FileOutputStream(convertedFile)) {
+            //write the file output as bytes
             fos.write(file.getBytes());
         } catch (IOException e) {
+            //error if unable to convert
             System.out.println("Error converting multipartFile to file. : " + e);
         }
         return convertedFile;
@@ -80,12 +82,14 @@ public class RecipeService {
     public Recipe createRecipe(RecipeDTO recipe, MultipartFile file) {
 
         User u = ur.findById(recipe.getUserid()).orElseThrow(UserNotFoundException::new);
+        //if file is not null and not empty, upload file and save recipe
         if (file != null && !file.isEmpty()) {
             String fileName = uploadFile(file);
 
             Recipe newRecipe = new Recipe(u, recipe.getTitle(), recipe.getInstructions(), recipe.getCategory(), fileName);
             return rr.save(newRecipe);
         } else {
+            //if file is null and empty, do not upload the file and save recipe
             Recipe newRecipe = new Recipe(u, recipe.getTitle(), recipe.getInstructions(), recipe.getCategory());
             newRecipe.setFilename("noimage.jpg");
             return rr.save(newRecipe);
@@ -106,24 +110,39 @@ public class RecipeService {
         String newInstructions = update.getInstructions();
         Category newCategory = update.getCategory();
         Recipe newRecipe = null;
-        try {
-             newRecipe = rr.getOne(id);
-             //note: error handling is already taken care of, no need to check this value.
-            // Will return a 400 bad request, saying
-            //that no recipe exists with that id.
 
-             //set new infos, save to db
-            //newRecipe.setAuthor(authorint);
-            newRecipe.setRecipe_name(newTitle);
-            newRecipe.setInstructions(newInstructions);
-            newRecipe.setCategory(newCategory);
+        //get author from recipe id passed in, check it is equal to
+        Recipe fromId = rr.findById(id).orElseThrow(RecipeNotFoundException::new); //no recipe with that id? throw .
+        User authFromRecipe = fromId.getAuthor();
+        int authId = authFromRecipe.getUser_id(); //the author id from the id passed in to us
 
-            newRecipe = rr.save(newRecipe);
-        } catch (RecipeNotFoundException r){
-            r.getClass(); //currently ignored. Proceed?
+        //let's test this out. I recall getAuthor.getUserId having problems...
+        User authFromUpdate = update.getAuthor();
+        int recipeId = authFromUpdate.getUser_id();
+        //PRAY for me, for Java is of the devil...
+
+        if (authId != recipeId){
+            return null; //if this method returns null, we build a badResponse in the controller.
+        } else {
+
+            try {
+                newRecipe = rr.getOne(id);
+                //note: error handling is already taken care of, no need to check this value.
+                // Will return a 400 bad request, saying
+                //that no recipe exists with that id.
+
+                //set new infos, save to db
+                //newRecipe.setAuthor(authorint); --> NULL, ignore.
+                newRecipe.setRecipe_name(newTitle);
+                newRecipe.setInstructions(newInstructions);
+                newRecipe.setCategory(newCategory);
+
+                newRecipe = rr.save(newRecipe);
+            } catch (RecipeNotFoundException r) {
+                r.getClass(); //currently ignored. Proceed?
+            }
+            return newRecipe;
         }
-    return newRecipe;
-
     }
 
     public List<Recipe> getRecipesByAuthorId(int id){
