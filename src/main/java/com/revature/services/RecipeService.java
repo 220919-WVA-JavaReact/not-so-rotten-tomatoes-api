@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class RecipeService {
@@ -106,24 +107,39 @@ public class RecipeService {
         String newInstructions = update.getInstructions();
         Category newCategory = update.getCategory();
         Recipe newRecipe = null;
-        try {
-             newRecipe = rr.getOne(id);
-             //note: error handling is already taken care of, no need to check this value.
-            // Will return a 400 bad request, saying
-            //that no recipe exists with that id.
 
-             //set new infos, save to db
-            //newRecipe.setAuthor(authorint);
-            newRecipe.setRecipe_name(newTitle);
-            newRecipe.setInstructions(newInstructions);
-            newRecipe.setCategory(newCategory);
+        //get author from recipe id passed in, check it is equal to
+        Recipe fromId = rr.findById(id).orElseThrow(RecipeNotFoundException::new); //no recipe with that id? throw .
+        User authFromRecipe = fromId.getAuthor();
+        int authId = authFromRecipe.getUser_id(); //the author id from the id passed in to us
 
-            newRecipe = rr.save(newRecipe);
-        } catch (RecipeNotFoundException r){
-            r.getClass(); //currently ignored. Proceed?
+        //let's test this out. I recall getAuthor.getUserId having problems...
+        User authFromUpdate = update.getAuthor();
+        int recipeId = authFromUpdate.getUser_id();
+        //PRAY for me, for Java is of the devil...
+
+        if (authId != recipeId){
+            return null; //if this method returns null, we build a badResponse in the controller.
+        } else {
+
+            try {
+                newRecipe = rr.getOne(id);
+                //note: error handling is already taken care of, no need to check this value.
+                // Will return a 400 bad request, saying
+                //that no recipe exists with that id.
+
+                //set new infos, save to db
+                //newRecipe.setAuthor(authorint); --> NULL, ignore.
+                newRecipe.setRecipe_name(newTitle);
+                newRecipe.setInstructions(newInstructions);
+                newRecipe.setCategory(newCategory);
+
+                newRecipe = rr.save(newRecipe);
+            } catch (RecipeNotFoundException r) {
+                r.getClass(); //currently ignored. Proceed?
+            }
+            return newRecipe;
         }
-    return newRecipe;
-
     }
 
     public List<Recipe> getRecipesByAuthorId(int id){
