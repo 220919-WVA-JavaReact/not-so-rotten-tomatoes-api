@@ -22,6 +22,6 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
 
     List<Recipe> findRecipesByAuthor(User u);
 
-    @Query(value="SELECT * FROM Recipes r WHERE LOWER(r.recipe_name) LIKE :searchTerm OR LOWER(r.instructions) LIKE :searchTerm", nativeQuery = true)
+    @Query(value="SELECT * FROM Recipes r WHERE LOWER(r.recipe_name) LIKE %:searchTerm% OR LOWER(r.instructions) LIKE %:searchTerm%", nativeQuery = true)
     List<Recipe> findByRecipeContains(@Param("searchTerm") String searchTerm);
 }
