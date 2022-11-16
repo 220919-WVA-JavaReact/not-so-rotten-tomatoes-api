@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class RecipeService {
@@ -106,6 +107,16 @@ public class RecipeService {
         String newInstructions = update.getInstructions();
         Category newCategory = update.getCategory();
         Recipe newRecipe = null;
+
+        //get author from recipe id passed in, check it is equal to
+        Recipe fromId = rr.findById(id).orElseThrow(RecipeNotFoundException::new); //no recipe with that id? throw .
+        User authFromRecipe = fromId.getAuthor();
+        int authId = authFromRecipe.getUser_id();
+
+        if (authId != id){
+            return null; //if this method returns null, we build a badResponse in the controller.
+        }
+
         try {
              newRecipe = rr.getOne(id);
              //note: error handling is already taken care of, no need to check this value.
